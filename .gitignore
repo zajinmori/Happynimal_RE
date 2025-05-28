@@ -1,0 +1,27 @@
+# === IDE 설정 ===
+.idea/
+*.iml
+*.iws
+.project
+.classpath
+.factorypath
+.settings/
+.springBeans
+
+# === 빌드 결과물 ===
+/target/
+.gradle/
+build/
+
+# === 임시/로그 파일 ===
+*.log
+*.tmp
+*.swp
+
+# === 운영체제별 숨김 파일 ===
+.DS_Store
+Thumbs.db
+
+# === 환경 설정 (필요시) ===
+.env
+*.properties.local
