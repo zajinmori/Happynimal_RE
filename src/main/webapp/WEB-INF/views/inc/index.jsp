@@ -87,7 +87,7 @@
                         </div>
                     </div>
                     
-                    <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
+                    <a href="login.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
                 </div>
             </nav>
 
