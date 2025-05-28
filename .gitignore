@@ -1,0 +1,24 @@
+# === IDE 설정 ===
+.idea/
+*.iml
+*.ipr
+*.iws
+.settings/
+.project
+.classpath
+.factorypath
+.springBeans
+
+# === 빌드 출력물 ===
+/bin/
+/target/
+
+# === 로그 및 임시 파일 ===
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+
+# === 기타 ===
+*.class
