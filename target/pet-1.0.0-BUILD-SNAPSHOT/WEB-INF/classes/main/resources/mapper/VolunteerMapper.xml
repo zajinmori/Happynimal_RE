@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.pet.mapper.VolunteerMapper">
+
+	<!-- 글목록 보기 -->
+	<select id="list" resultType="com.test.pet.model.VolunteerBoardDTO">
+		select seq, title, idmembershelter, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate 
+			from BoardVolunteer
+				order by seq desc
+	</select>
+
+	<!-- 글쓰기 -->
+	<insert id="add" parameterType="com.test.pet.model.VolunteerBoardDTO">
+		insert into BoardVolunteer (
+					seq, 
+					idMemberShelter, 
+					idAdmin, 
+					title,
+					content,
+					dateVolunteerStart, 
+					dateVolunteerEnd, 
+					dateRecruitStart, 
+					dateRecruitEnd,
+					numCount,
+					regdate)
+    		values (
+    				seqBoardVolunteer.nextVal,
+    				 #{idMemberShelter},
+    				 #{idAdmin, jdbcType=VARCHAR}, 
+    				 #{title},
+    				 #{content},
+    				 #{dateVolunteerStart}, 
+    				 #{dateVolunteerEnd}, 
+    				 #{dateRecruitStart}, 
+    				 #{dateRecruitEnd}, 
+    				 #{numCount}, 
+    				 default
+    				)
+	</insert>
+	
+		<!-- 상세보기 -->
+	<select id="get" resultType="com.test.pet.model.VolunteerBoardDTO">
+	     select 
+	        seq, 
+	        title, 
+	        idMemberShelter,
+	        TO_CHAR(regdate, 'YYYY-MM-DD') as regdate,
+	        TO_CHAR(dateVolunteerStart, 'YYYY-MM-DD') as dateVolunteerStart,
+	        TO_CHAR(dateVolunteerEnd, 'YYYY-MM-DD') as dateVolunteerEnd,
+	        TO_CHAR(dateRecruitStart, 'YYYY-MM-DD') as dateRecruitStart,
+	        TO_CHAR(dateRecruitEnd, 'YYYY-MM-DD') as dateRecruitEnd,
+	        content,
+	        numCount
+	    from BoardVolunteer 
+	    where seq = #{seq}
+	</select>
+	
+	<!-- 수정하기 -->
+	<update id="edit" parameterType="com.test.pet.model.VolunteerBoardDTO">
+		update BoardVolunteer set
+			
+			title = #{title},
+			content = #{content},
+			datevolunteerStart = #{dateVolunteerStart},
+			datevolunteerEnd = #{dateVolunteerEnd},
+			dateRecruitStart = #{dateRecruitStart},
+			dateRecruitEnd = #{dateRecruitEnd},
+			numCount = #{numCount}		
+				where seq = #{seq}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="del" parameterType="string">
+		delete from BoardVolunteer
+			where seq = #{seq}
+	</delete>
+	
+</mapper>

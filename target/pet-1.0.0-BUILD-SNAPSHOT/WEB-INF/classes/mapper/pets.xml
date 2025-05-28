@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- mybatis-3-mapper.dtd" 이렇게 끝나는거 확인하기 -->
+
+  
+ <!-- 매퍼 파일 > SQL을 작성하는 역할 -->
+  <!-- <mapper namespace="업무에 맞게 지으면됨 보통 파일명 잘 넣음"> -->
+  <mapper namespace="pets"> <!-- = 매퍼파일은 여러개가 될 수 있어서 구분자이다 -->
+  
+
+  
+  </mapper>
+  
+  
+  
+  
+  
+  
