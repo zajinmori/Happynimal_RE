@@ -25,3 +25,4 @@ Thumbs.db
 # === 환경 설정 (필요시) ===
 .env
 *.properties.local
+/.metadata/
