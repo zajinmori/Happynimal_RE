@@ -20,7 +20,6 @@
         <security:intercept-url pattern="/resources/**" access="permitAll" />
         <security:intercept-url pattern="/index.do" access="permitAll"/>
         <security:intercept-url pattern="/applicationadoption.do" access="isAuthenticated()"/>
-        <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:form-login
                 login-page="/login.do"
                 login-processing-url="/login.do"
@@ -40,9 +39,13 @@
     </security:authentication-manager>
 
     <!-- 테스트용: NoOpPasswordEncoder 사용 -->
-    <bean id="bcryptPasswordEncoder"
+    <!--<bean id="bcryptPasswordEncoder"
           class="org.springframework.security.crypto.password.NoOpPasswordEncoder"
-          factory-method="getInstance" />
+          factory-method="getInstance" />-->
+
+    <!-- 비밀번호 암호화기 등록 -->
+    <bean id="bcryptPasswordEncoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 
 

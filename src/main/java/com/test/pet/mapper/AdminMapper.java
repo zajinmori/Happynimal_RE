@@ -8,4 +8,6 @@ public interface AdminMapper {
 
     AdminDTO findByAdminId(String id);
 
+    void insertAdmin(AdminDTO admin);
+
 }
