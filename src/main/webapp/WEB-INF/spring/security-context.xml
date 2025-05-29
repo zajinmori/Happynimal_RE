@@ -18,7 +18,8 @@
         <security:csrf disabled="true"/>
         <security:intercept-url pattern="/login.do" access="permitAll"/>
         <security:intercept-url pattern="/resources/**" access="permitAll" />
-        <security:intercept-url pattern="/index.do" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/index.do" access="permitAll"/>
+        <security:intercept-url pattern="/applicationadoption.do" access="isAuthenticated()"/>
         <security:intercept-url pattern="/**" access="isAuthenticated()"/>
         <security:form-login
                 login-page="/login.do"
