@@ -28,7 +28,12 @@
                 authentication-failure-url="/login.do?error=true"
                 username-parameter="username"
                 password-parameter="password" />
-        <security:logout logout-success-url="/login?logout=true"/>
+
+        <security:logout
+                logout-url="/logout"
+                logout-success-url="/index.do"
+                invalidate-session="true"
+                delete-cookies="JSESSIONID"/>
     </security:http>
 
     <!-- 사용자 인증 처리기 설정 -->
@@ -38,7 +43,7 @@
         </security:authentication-provider>
     </security:authentication-manager>
 
-    <!-- 테스트용: NoOpPasswordEncoder 사용 -->
+    <!-- 테스트용: NoOpPasswordEncoder(비밀번호 암호화X) 사용 -->
     <!--<bean id="bcryptPasswordEncoder"
           class="org.springframework.security.crypto.password.NoOpPasswordEncoder"
           factory-method="getInstance" />-->
