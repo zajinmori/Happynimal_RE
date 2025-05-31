@@ -132,7 +132,7 @@
 
     <h2 id="volunteeradd">봉사활동 모집 등록</h2>
     <div id="form-container">
-      <form method="POST" action="/petaddok.do" enctype="multipart/form-data">
+      <form id="myForm" method="POST" action="/petaddok.do" enctype="multipart/form-data">
 
 
         <label>보호소</label>
@@ -204,7 +204,8 @@
 
         <!-- 이미지 파일 업로드 -->
         <label>이미지 첨부:</label>
-        <input type="file" name="image" multiple /><br/><br/>
+        <input type="file" name="image" id="imageInput" multiple /><br/><br/>
+        <div id="previewContainer" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
 
         <button type="submit">등록하기</button>
 
@@ -253,11 +254,11 @@
 
 <!-- Template Javascript -->
 <script src="<c:url value='/resources/js/main.js'/>"></script>
-<script>
 
 
-
-</script>
 </body>
+
+<%--유기동물 게시판 등록 페이지에서 사진 미리보기--%>
+<script src="<c:url value='/resources/js/petBoard.js'/>"></script>
 
 </html>
