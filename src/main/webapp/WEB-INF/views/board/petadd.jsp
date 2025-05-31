@@ -204,7 +204,7 @@
 
         <!-- 이미지 파일 업로드 -->
         <label>이미지 첨부:</label>
-        <input type="file" name="image" id="imageInput" multiple /><br/><br/>
+        <input type="file" name="images" id="imageInput" multiple /><br/><br/>
         <div id="previewContainer" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
 
         <button type="submit">등록하기</button>

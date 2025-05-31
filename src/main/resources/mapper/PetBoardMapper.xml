@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.test.pet.mapper.PetBoardMapper">
+<mapper namespace="com.test.pet.mapper.PetBoardDAO">
 
     <insert id="insertPet" parameterType="com.test.pet.model.PetDTO">
         <selectKey keyProperty="id" resultType="long" order="BEFORE">
@@ -15,20 +15,8 @@
     </insert>
 
 
-    <insert id="insertImage" parameterType="com.test.pet.model.ImageDTO">
-        <selectKey keyProperty="seq" resultType="long" order="BEFORE">
-            SELECT seqImage.NEXTVAL FROM dual
-        </selectKey>
-
-        INSERT INTO image (seq, image)
-        VALUES (#{seq}, #{image})
-    </insert>
 
 
-    <insert id="insertPetImage" parameterType="com.test.pet.model.PetImageDTO">
-        INSERT INTO pet_image (seq, seqPet, seqImage)
-        VALUES (seqPet_Image.nextval, #{seqPet}, #{seqImage})
-    </insert>
 
 
 

@@ -61,7 +61,7 @@ myForm.addEventListener('submit', function(e) {
 
     // 이미지 파일들 추가
     selectedFiles.forEach(file => {
-        formData.append('image', file);
+        formData.append('images', file);
     });
 
     // 기타 input들도 추가
@@ -77,14 +77,20 @@ myForm.addEventListener('submit', function(e) {
         method: 'POST',
         body: formData
     }).then(response => {
-        if (response.ok) {
-            alert('업로드 완료');
-            window.location.href = '/petboard.do';
-        } else {
-            alert('업로드 실패');
-        }
+        return response.text().then(text => {
+            console.log('서버 응답 상태:', response.status);
+            console.log('서버 응답 내용:', text);
+
+            if (response.ok) {
+                alert('등록에 성공했습니다 !🐶');
+                window.location.href = '/petboard.do';
+            } else {
+                alert('등록 실패: ' + text);
+            }
+        });
     }).catch(err => {
         console.error(err);
         alert('에러 발생');
     });
+
 });

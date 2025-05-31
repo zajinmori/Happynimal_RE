@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.pet.mapper.PetImageDAO">
+
+
+    <insert id="insertImage" parameterType="com.test.pet.model.ImageDTO">
+        <selectKey keyProperty="seq" resultType="long" order="BEFORE">
+            SELECT seqImage.NEXTVAL FROM dual
+        </selectKey>
+
+        INSERT INTO image (seq, image)
+        VALUES (#{seq}, #{image})
+    </insert>
+
+</mapper>
