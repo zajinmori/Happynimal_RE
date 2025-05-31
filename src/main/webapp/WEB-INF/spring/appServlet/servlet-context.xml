@@ -13,7 +13,14 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 
-	<mvc:annotation-driven />
+
+	<!-- 정적 리소스를 default 서블릿에게 위임 -->
+	<mvc:default-servlet-handler/>
+
+	<!-- 필수: 어노테이션 기반 컨트롤러 등 활성화 -->
+	<mvc:annotation-driven/>
+
+	
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 

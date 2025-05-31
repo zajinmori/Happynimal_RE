@@ -2,14 +2,16 @@ package com.test.pet.model;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class PetBoardDTO {
 
-    private String id;
+    private Long id;
     private String name;
-    private String shelterId;
+    private Integer age;
     private String shelterName;
-    private String image;
-    private int age;
-    private String gender;
+
+    private List<ImageDTO> images;
+    private String randomImage;
 }

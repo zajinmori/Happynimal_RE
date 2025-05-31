@@ -15,4 +15,11 @@
         VALUES (#{seq}, #{image})
     </insert>
 
+    <select id="selectImagesByPetId" parameterType="long" resultType="com.test.pet.model.ImageDTO">
+        select i.seq, i.image
+        from pet_image pi
+        join image i ON pi.seqImage = i.seq
+        where pi.seqPet = #{petId}
+    </select>
+
 </mapper>

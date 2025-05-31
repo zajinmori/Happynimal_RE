@@ -72,6 +72,8 @@ myForm.addEventListener('submit', function(e) {
         }
     });
 
+
+
     // 실제 전송 (fetch 사용)
     fetch('/petaddok.do', {
         method: 'POST',

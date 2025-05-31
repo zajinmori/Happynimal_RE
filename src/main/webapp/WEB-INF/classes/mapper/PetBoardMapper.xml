@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.test.pet.mapper.PetBoardDAO">
+<mapper namespace="com.test.pet.mapper.PetBoardInsertDAO">
 
   <insert id="insertPet" parameterType="com.test.pet.model.PetDTO" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO pet2 (

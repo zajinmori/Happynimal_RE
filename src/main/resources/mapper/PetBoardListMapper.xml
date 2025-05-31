@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.pet.mapper.PetBoardListDAO">
+
+    <select id="selectAllPetBoard" resultMap="PetBoardMap">
+        select
+            p.id,
+            p.name,
+            p.age,
+            p.seqShelterId,
+            s.name AS shelterName
+        from
+            pet2 p
+        join
+            shelter s ON p.seqShelterId = s.seq
+    </select>
+
+    <resultMap id="PetBoardMap" type="com.test.pet.model.PetBoardDTO">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="shelterName" column="shelterName"/>
+    </resultMap>
+
+</mapper>

@@ -12,10 +12,10 @@ public class PetDTO {
     private int age;
     private String gender;
     private String neutered;
-    private int weight;
+    private double weight;
     private String detail;
     private String location;
-    private int seqShelterId;
+    private Long seqShelterId;
     private Date regdate;
     private String petInfo;
 

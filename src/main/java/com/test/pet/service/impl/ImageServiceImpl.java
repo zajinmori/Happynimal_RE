@@ -25,7 +25,15 @@ public class ImageServiceImpl implements ImageService {
     public ImageDTO saveImage(MultipartFile file) throws IOException{
 
         String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        String path = servletContext.getRealPath("/resources/img/");
+        String path = servletContext.getRealPath("/upload");
+
+        System.out.println("저장 경로: " + path);
+
+        File uploadDir = new File(path);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs(); // upload 폴더가 없으면 생성
+        }
+
         file.transferTo(new File(path,filename));
 
         //image 테이블에 저장

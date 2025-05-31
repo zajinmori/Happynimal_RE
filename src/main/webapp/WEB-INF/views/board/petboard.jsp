@@ -131,34 +131,32 @@
         <button>검색</button>
     </div> -->
 
-    <table class="board-table">
-        <thead>
+    <div class="container mt-5">
+        <div class="row">
+            <c:forEach var="pet" items="${petList}" varStatus="status">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top" alt="동물 이미지" style="height: 200px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">${pet.name}</h5>
+                        <p class="card-text">나이: ${pet.age}살</p>
+                        <p class="card-text">보호소: ${pet.shelterName}</p>
+                        <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
+                    </div>
+                </div>
+            </div>
 
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        <a href="petadd.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">등록</a>
-        </thead>
-        <tbody>
-        <c:if test="${not empty volunteerList}">
-            <c:forEach items="${volunteerList}" var="VolunteerBoardDTO">
-                <tr>
-                    <td>${VolunteerBoardDTO.seq}</td>
-                    <td><a href="volunteerdetail.do?seq=${VolunteerBoardDTO.seq}">${VolunteerBoardDTO.title}</a></td>
-                    <td>${VolunteerBoardDTO.idMemberShelter}</td>
-                    <td>${VolunteerBoardDTO.regdate}</td>
-                </tr>
-            </c:forEach>
+                <%-- 줄 나누기: 3개마다 줄바꿈 --%>
+            <c:if test="${(status.index + 1) % 3 == 0}">
+        </div><div class="row">
         </c:if>
+        </c:forEach>
+    </div>
+    </div>
 
-
-        </tbody>
-    </table>
-
-
+    <div class="text-center my-4">
+        <a href="petadd.do" class="btn btn-primary btn-lg">게시글 등록</a>
+    </div>
 
     <!-- About End -->
 

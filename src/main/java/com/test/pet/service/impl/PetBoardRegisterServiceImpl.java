@@ -3,7 +3,7 @@ package com.test.pet.service.impl;
 import com.test.pet.model.ImageDTO;
 import com.test.pet.model.PetDTO;
 import com.test.pet.service.ImageService;
-import com.test.pet.service.PetBoardService;
+import com.test.pet.service.PetBoardRegisterService;
 import com.test.pet.service.PetImageRelationService;
 import com.test.pet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
 @Service
-public class PetBoardServiceImpl implements PetBoardService {
+public class PetBoardRegisterServiceImpl implements PetBoardRegisterService {
 
     @Autowired
     private PetService petService;
