@@ -1,7 +1,9 @@
 package com.test.pet.controller;
 
 import com.test.pet.model.PetBoardDTO;
+import com.test.pet.model.PetBoardDetailDTO;
 import com.test.pet.model.PetDTO;
+import com.test.pet.service.PetBoardDetailService;
 import com.test.pet.service.PetBoardListService;
 import com.test.pet.service.PetBoardRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,10 @@ public class PetBoardController {
 	@Autowired
 	PetBoardListService petBoardListService;
 
+	@Autowired
+	PetBoardRegisterService petBoardRegisterService;
+
+
 	//유기동물 목록 컨트롤러
 	@GetMapping("/petboard.do")
 	public String petBoardList(Model model) {
@@ -37,8 +43,6 @@ public class PetBoardController {
 	}
 
 
-	@Autowired
-	PetBoardRegisterService petBoardRegisterService;
 
 	//유기동물 등록 제출 컨트롤러
 	@PostMapping("/petaddok.do")
@@ -68,12 +72,21 @@ public class PetBoardController {
 		petDTO.setWeight(weight);
 		petDTO.setDetail(detail);
 
-		System.out.println("🐶 등록된 정보: " + petDTO);
-		System.out.println("📷 이미지 개수: " + (images != null ? images.length : 0));
+		System.out.println("등록된 정보: " + petDTO);
+		System.out.println("이미지 개수: " + (images != null ? images.length : 0));
 
 		petBoardRegisterService.registerPetWithImages(petDTO, images);
 
 
 		return ResponseEntity.ok("등록 성공");
+	}
+
+
+
+	@GetMapping("/petdetail.do")
+	public String petDetail(@RequestParam("seq") Long id, Model model) {
+		PetBoardDetailDTO dto = petBoardListService.getPetBoardDetail(id);
+		model.addAttribute("pet", dto);
+		return "board/petboarddetail";
 	}
 }

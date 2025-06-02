@@ -4,7 +4,7 @@ import com.test.pet.model.PetImageDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface PetImageRelationDAO {
+public interface PetImageRelationMapper {
 
     int insertPetImage(PetImageDTO petImageDTO);
 }

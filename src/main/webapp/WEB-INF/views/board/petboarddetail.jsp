@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +33,7 @@
     <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
 </head>
 
-<body>
+<>
 
 <!-- Spinner Start -->
 <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -62,7 +63,7 @@
                         <a href="adoptioninfo.do" class="dropdown-item">입양안내</a>
                         <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
                         <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                        <a href="review.do" class="dropdown-item">입양후기</a>
+                        <a href="review.do" class="dropdown-item ">입양후기</a>
                     </div>
                 </div>
 
@@ -91,17 +92,48 @@
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
         <div class="container text-center py-5" style="max-width: 900px;">
-            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">기다리는 친구들</h4>
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">상세보기</h4>
             <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                 <li class="breadcrumb-item"><a href="index.do">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Adoption</a></li>
-                <li class="breadcrumb-item active text-primary">PetBoard</li>
+                <li class="breadcrumb-item active text-primary">Pet Board</li>
             </ol>
         </div>
     </div>
     <!-- Header End -->
 </div>
 <!-- Navbar & Hero End -->
+
+<div class="image-container" id="imageContainer">
+    <button class="arrow" onclick="prevImage()">←</button>
+    <button class="arrow" onclick="nextImage()">→</button>
+
+    <c:forEach var="img" items="${pet.images}" varStatus="status">
+        <img src="${pageContext.request.contextPath}/upload/${img.image}" alt="동물사진 ${status.index}" class="${status.index == 0 ? 'active' : ''}">
+    </c:forEach>
+</div>
+
+<dl>
+    <dt>이름</dt><dd>${pet.name}</dd>
+    <dt>나이</dt><dd>${pet.age}</dd>
+    <dt>품종</dt><dd>${pet.petInfo}</dd>
+    <dt>무게</dt><dd>${pet.weight}</dd>
+    <dt>성별</dt><dd>${pet.gender}</dd>
+    <dt>중성화 여부</dt><dd>${pet.neutered}</dd>
+    <dt>보호소</dt><dd>${pet.shelterName}</dd>
+    <dt>등록일자</dt><dd>${pet.regdate}</dd>
+    <dt>발견 장소</dt><dd>${pet.location}</dd>
+</dl>
+
+
+<%--        <div id="button-container">--%>
+<%--            <button type="button" class="action-button" id="edit-button" onclick="location.href='volunteeredit.do?seq=${VolunteerListDTO.seq}';">수정하기</button>--%>
+<%--            <button type="button" class="action-button" id="delete-button" onclick="location.href='volunteerdel.do?seq=${VolunteerListDTO.seq}';">삭제하기</button>--%>
+<%--            <button type="button" class="action-button" id="back-button" onclick="location.href='volunteerboard.do';">목록으로 돌아가기</button>--%>
+<%--        </div>--%>
+
+    </div>
+</div>
 
 <!-- Modal Search Start -->
 <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -122,89 +154,66 @@
 </div>
 <!-- Modal Search End -->
 
-<!-- About Start -->
-<div class="board-container">
+<!-- feature Start -->
 
-    <!-- <div class="search-bar">
-        <input type="text" placeholder="검색어를 입력하세요" />
-        <button>검색</button>
-    </div> -->
+<!-- feature End -->
 
-    <div class="container mt-5">
-        <div class="row">
-            <c:forEach var="pet" items="${petList}" varStatus="status">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top" alt="동물 이미지" style="height: 200px; object-fit: cover;">
-                    <p>경로: ${pageContext.request.contextPath}/upload/${pet.randomImage}</p>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">${pet.name}</h5>
-                        <p class="card-text">나이: ${pet.age}살</p>
-                        <p class="card-text">보호소: ${pet.shelterName}</p>
-                        <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
-                    </div>
-                </div>
+
+
+
+<!-- Copyright Start -->
+<div class="container-fluid copyright py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-md-0">
+                <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
             </div>
-
-                <%-- 줄 나누기: 3개마다 줄바꿈 --%>
-            <c:if test="${(status.index + 1) % 3 == 0}">
-        </div><div class="row">
-        </c:if>
-        </c:forEach>
-    </div>
-    </div>
-
-    <div class="text-center my-4">
-        <a href="petadd.do" class="btn btn-primary btn-lg">게시글 등록</a>
-    </div>
-
-    <!-- About End -->
-
-    <!-- Fact Counter -->
-
-    <!-- Fact Counter -->
-
-    <!-- feature Start -->
-
-    <!-- feature End -->
-
-    <!-- Footer Start -->
-
-    <!-- Copyright Start -->
-    <div class="container-fluid copyright py-4">
-        <div class="container">
-            <div class="row g-4 align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-md-0">
-                    <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                </div>
-                <div class="col-md-6 text-center text-md-end text-body">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
-                </div>
+            <div class="col-md-6 text-center text-md-end text-body">
+                <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
+                <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
+                <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
+</div>
+<!-- Copyright End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+<!-- Back to Top -->
+<a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<c:url value='/resources/lib/wow/wow.min.js' />"></script>
-    <script src="<c:url value='/resources/lib/easing/easing.min.js'/>"></script>
-    <script src="<c:url value='/resources/lib/waypoints/waypoints.min.js'/>"></script>
-    <script src="<c:url value='/resources/lib/counterup/counterup.min.js'/>"></script>
-    <script src="<c:url value='/resources/lib/owlcarousel/owl.carousel.min.js'/>"></script>
+<!-- JavaScript Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<c:url value='/resources/lib/wow/wow.min.js' />"></script>
+<script src="<c:url value='/resources/lib/easing/easing.min.js'/>"></script>
+<script src="<c:url value='/resources/lib/waypoints/waypoints.min.js'/>"></script>
+<script src="<c:url value='/resources/lib/counterup/counterup.min.js'/>"></script>
+<script src="<c:url value='/resources/lib/owlcarousel/owl.carousel.min.js'/>"></script>
 
 
-    <!-- Template Javascript -->
-    <script src="<c:url value='/resources/js/main.js'/>"></script>
+<!-- Template Javascript -->
+<script src="<c:url value='/resources/js/main.js'/>"></script>
+
+<script>
+    let index = 0;
+    function showImage(i) {
+        const imgs = document.querySelectorAll(".image-container img");
+        imgs.forEach((img, idx) => img.classList.toggle("active", idx === i));
+    }
+    function prevImage() {
+        const imgs = document.querySelectorAll(".image-container img");
+        index = (index - 1 + imgs.length) % imgs.length;
+        showImage(index);
+    }
+    function nextImage() {
+        const imgs = document.querySelectorAll(".image-container img");
+        index = (index + 1) % imgs.length;
+        showImage(index);
+    }
+</script>
 </body>
 
 </html>

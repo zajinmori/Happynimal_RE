@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 
 @Mapper
-public interface PetBoardInsertDAO {
+public interface PetBoardInsertMapper {
 
     int insertPet(PetDTO petDTO); //성공하면 1반환하게 int로
 }
