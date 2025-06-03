@@ -5,17 +5,24 @@
 
 <mapper namespace="com.test.pet.mapper.PetBoardListMapper">
 
-    <select id="selectAllPetBoard" resultMap="PetBoardMap">
-        select
-            p.id,
-            p.name,
-            p.age,
-            p.seqShelterId,
-            s.name AS shelterName
-        from
-            pet2 p
-        join
-            shelter s ON p.seqShelterId = s.seq
+    <select id="selectPetBoardList" resultMap="PetBoardMap">
+<![CDATA[
+        SELECT * FROM (
+        SELECT ROWNUM AS rnum, inner.* FROM (
+        SELECT
+        p.id,
+        p.name,
+        p.age,
+        p.seqShelterId,
+        s.name AS shelterName
+        FROM pet2 p
+        JOIN shelter s ON p.seqShelterId = s.seq
+        ORDER BY p.id DESC
+        ) inner
+        WHERE ROWNUM <= #{endRow}
+        )
+        WHERE rnum >= #{startRow}
+        ]]>
     </select>
 
     <resultMap id="PetBoardMap" type="com.test.pet.model.PetBoardDTO">
@@ -24,5 +31,14 @@
         <result property="age" column="age"/>
         <result property="shelterName" column="shelterName"/>
     </resultMap>
+
+
+
+    <select id="countAllPets" resultType="int">
+        select count(*) from pet2
+
+    </select>
+
+
 
 </mapper>

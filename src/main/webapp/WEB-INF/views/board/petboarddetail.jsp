@@ -1,9 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+    .pet-detail-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 40px 20px;
+    }
+
+    /* 이미지 슬라이더 영역 */
+    .image-container {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .card-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dcard-image {
+        display: none;
+    }
+
+    .dcard-image.active {
+        display: block;
+    }
+
+    .dcard-image img {
+        width: 100%;
+        height: 400px;
+        max-height: 450px;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+
+    /* 화살표 버튼 */
+    .arrow-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0);
+        color: darkorange;
+        font-size: 60px;
+        border: none;
+        padding: 16px 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .left-btn {
+
+        left: -100px;
+    }
+
+    .right-btn {
+
+        right: -100px;
+    }
+
+    /* 정보 카드 */
+    .pet-info-card {
+        max-width: 600px;
+        width: 100%;
+        background-color: #fffdf5;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 30px 40px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        font-size: 18px;
+    }
+
+    .pet-info-card dl {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        row-gap: 12px;
+        column-gap: 10px;
+    }
+
+    .pet-info-card dt {
+        font-weight: bold;
+        text-align: right;
+        color: #333;
+    }
+
+    .pet-info-card dd {
+        margin: 0;
+        color: #444;
+    }
+
+
+</style>
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +134,6 @@
     <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
 </head>
 
-<>
 
 <!-- Spinner Start -->
 <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -104,26 +204,56 @@
 </div>
 <!-- Navbar & Hero End -->
 
-<div class="image-container" id="imageContainer">
-    <button class="arrow" onclick="prevImage()">←</button>
-    <button class="arrow" onclick="nextImage()">→</button>
+<div class="pet-detail-container">
+    <!-- 이미지 슬라이더 -->
+    <div class="image-container">
+        <button class="arrow-btn left-btn" onclick="prevImage()"><i class="fas fa-angle-left"></i></button>
+        <div class="card-image-container">
+            <c:forEach var="img" items="${pet.images}" varStatus="status">
+                <div class="dcard-image ${status.index == 0 ? 'active' : ''}">
+                    <img src="${pageContext.request.contextPath}/upload/${img.image}" alt="동물사진 ${status.index}">
+                </div>
+            </c:forEach>
+        </div>
+        <button class="arrow-btn right-btn" onclick="nextImage()"><i class="fas fa-angle-right"></i></button>
+    </div>
 
-    <c:forEach var="img" items="${pet.images}" varStatus="status">
-        <img src="${pageContext.request.contextPath}/upload/${img.image}" alt="동물사진 ${status.index}" class="${status.index == 0 ? 'active' : ''}">
-    </c:forEach>
+<div class="pet-info-card">
+
+    <dl>
+        <dt>이름: </dt><dd>${pet.name}</dd>
+        <dt>나이: </dt><dd>${pet.age}세</dd>
+        <dt>품종: </dt><dd>${pet.petInfo}</dd>
+        <dt>무게: </dt><dd>${pet.weight}Kg</dd>
+        <dt>성별: </dt>
+        <dd>
+            <c:choose>
+                <c:when test="${pet.gender == 'M'}">수컷</c:when>
+                <c:when test="${pet.gender == 'F'}">암컷</c:when>
+            </c:choose>
+        </dd>
+        <dt>중성화 여부: </dt>
+        <dd>
+            <c:choose>
+                <c:when test="${pet.neutered == 'Y'}">O</c:when>
+                <c:when test="${pet.neutered == 'N'}">X</c:when>
+                <c:otherwise>정보없음</c:otherwise>
+            </c:choose>
+        </dd>
+        <dt>발견 장소: </dt><dd>${pet.location}</dd>
+        <dt>보호소: </dt><dd>${pet.shelterName}</dd>
+        <dt>등록일자: </dt>
+        <dd>
+            <fmt:formatDate value="${pet.regdate}" pattern="yyyy년 M월 d일"/>
+        </dd>
+
+    </dl>
+
 </div>
-
-<dl>
-    <dt>이름</dt><dd>${pet.name}</dd>
-    <dt>나이</dt><dd>${pet.age}</dd>
-    <dt>품종</dt><dd>${pet.petInfo}</dd>
-    <dt>무게</dt><dd>${pet.weight}</dd>
-    <dt>성별</dt><dd>${pet.gender}</dd>
-    <dt>중성화 여부</dt><dd>${pet.neutered}</dd>
-    <dt>보호소</dt><dd>${pet.shelterName}</dd>
-    <dt>등록일자</dt><dd>${pet.regdate}</dd>
-    <dt>발견 장소</dt><dd>${pet.location}</dd>
-</dl>
+    <div class="text-center my-4">
+        <a href="petboard.do" class="btn btn-primary btn-lg">목록으로</a>
+        <a href="adoptioninfo.do" class="btn btn-primary btn-lg">🐶입양하기😺</a>
+    </div>
 
 
 <%--        <div id="button-container">--%>
@@ -196,24 +326,11 @@
 
 <!-- Template Javascript -->
 <script src="<c:url value='/resources/js/main.js'/>"></script>
+<script src="<c:url value='/resources/js/PetBoardDetail.js'/>"></script>
 
-<script>
-    let index = 0;
-    function showImage(i) {
-        const imgs = document.querySelectorAll(".image-container img");
-        imgs.forEach((img, idx) => img.classList.toggle("active", idx === i));
-    }
-    function prevImage() {
-        const imgs = document.querySelectorAll(".image-container img");
-        index = (index - 1 + imgs.length) % imgs.length;
-        showImage(index);
-    }
-    function nextImage() {
-        const imgs = document.querySelectorAll(".image-container img");
-        index = (index + 1) % imgs.length;
-        showImage(index);
-    }
-</script>
+
+
+
 </body>
 
 </html>

@@ -4,6 +4,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+    .custom-img {
+        width: 100%;
+        height: 280px;         /* 원하는 높이로 조절 */
+        object-fit: cover;
+        border-radius: 10px;   /* 예쁘게 라운딩 */
+    }
+
+</style>
 <head>
     <meta charset="utf-8">
     <title>Happynimal</title>
@@ -48,6 +57,7 @@
         <a href="index.do" class="navbar-brand p-0">
             <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
             <!-- <img src="img/logo.png" alt="Logo"> -->
+
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -125,50 +135,46 @@
 <!-- About Start -->
 <div class="board-container">
 
-    <!-- <div class="search-bar">
-        <input type="text" placeholder="검색어를 입력하세요" />
-        <button>검색</button>
-    </div> -->
 
     <div class="container mt-5">
         <div class="row">
-            <c:forEach var="pet" items="${petList}" varStatus="status">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top" alt="동물 이미지" style="height: 200px; object-fit: cover;">
-                    <p>경로: ${pageContext.request.contextPath}/upload/${pet.randomImage}</p>
-                    <div class="card-body text-center">
-                        <h5 class="card-title">${pet.name}</h5>
-                        <p class="card-text">나이: ${pet.age}살</p>
-                        <p class="card-text">보호소: ${pet.shelterName}</p>
-                        <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
+            <c:forEach var="pet" items="${petList}">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top custom-img" alt="동물 이미지">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${pet.name}</h5>
+                            <p class="card-text">나이: ${pet.age}살</p>
+                            <p class="card-text">보호소: ${pet.shelterName}</p>
+                            <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </c:forEach>
+        </div>
+    </div>
+</div>
 
-                <%-- 줄 나누기: 3개마다 줄바꿈 --%>
-            <c:if test="${(status.index + 1) % 3 == 0}">
-        </div><div class="row">
-        </c:if>
-        </c:forEach>
-    </div>
-    </div>
 
     <div class="text-center my-4">
         <a href="petadd.do" class="btn btn-primary btn-lg">게시글 등록</a>
     </div>
 
-    <!-- About End -->
+<div class="pagination mt-4 text-center">
+    <c:if test="${pageInfo.startPage > 1}">
+        <a href="petboard.do?page=${pageInfo.startPage - 1}">이전</a>
+    </c:if>
 
-    <!-- Fact Counter -->
+    <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i">
+        <a href="petboard.do?page=${i}" class="${i == pageInfo.currentPage ? 'active' : ''}">${i}</a>
+    </c:forEach>
 
-    <!-- Fact Counter -->
+    <c:if test="${pageInfo.endPage < pageInfo.totalPage}">
+        <a href="petboard.do?page=${pageInfo.endPage + 1}">다음</a>
+    </c:if>
+</div>
 
-    <!-- feature Start -->
 
-    <!-- feature End -->
-
-    <!-- Footer Start -->
 
     <!-- Copyright Start -->
     <div class="container-fluid copyright py-4">
@@ -181,7 +187,7 @@
                     <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                     <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                     <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+
                 </div>
             </div>
         </div>
@@ -203,7 +209,7 @@
     <script src="<c:url value='/resources/lib/owlcarousel/owl.carousel.min.js'/>"></script>
 
 
-    <!-- Template Javascript -->
+
     <script src="<c:url value='/resources/js/main.js'/>"></script>
 </body>
 

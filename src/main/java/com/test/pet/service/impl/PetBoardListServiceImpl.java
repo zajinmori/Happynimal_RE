@@ -10,7 +10,9 @@ import com.test.pet.service.PetBoardListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service
@@ -18,13 +20,34 @@ public class PetBoardListServiceImpl implements PetBoardListService {
 
     @Autowired
     private PetBoardListMapper petBoardListMapper;
-
     @Autowired
     private PetImageMapper petImageMapper;
+    @Autowired
+    private PetBoardDetailMapper petBoardDetailMapper;
+
 
     @Override
-    public List<PetBoardDTO> getAllPetBoard() {
-        List<PetBoardDTO> petList = petBoardListMapper.selectAllPetBoard();
+    public PetBoardDetailDTO getPetBoardDetail(Long id) {
+        return petBoardDetailMapper.selectPetBoardDetail(id);
+    }
+
+
+    @Override
+    public int getTotalPetCount() {
+        return petBoardListMapper.countAllPets();
+    }
+
+
+    @Override
+    public List<PetBoardDTO> getPetBoardList(int page, int pageSize) {
+        int startRow = (page - 1) * pageSize + 1;
+        int endRow = page * pageSize;
+
+        Map<String, Object> params = new HashMap<>();
+            params.put("startRow", startRow);
+            params.put("endRow", endRow);
+
+        List<PetBoardDTO> petList = petBoardListMapper.selectPetBoardList(params);
 
         for(PetBoardDTO petBoardDTO : petList){
             List<ImageDTO> images = petImageMapper.selectImagesByPetId(petBoardDTO.getId());
@@ -35,16 +58,6 @@ public class PetBoardListServiceImpl implements PetBoardListService {
                 petBoardDTO.setRandomImage(randomDTO.getImage());
             }
         }
-
         return petList;
-    }
-
-
-    @Autowired
-    private PetBoardDetailMapper petBoardDetailMapper;
-
-    @Override
-    public PetBoardDetailDTO getPetBoardDetail(Long id) {
-        return petBoardDetailMapper.selectPetBoardDetail(id);
     }
 }

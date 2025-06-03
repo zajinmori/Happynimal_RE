@@ -1,5 +1,6 @@
 package com.test.pet.controller;
 
+import com.test.pet.model.PageDTO;
 import com.test.pet.model.PetBoardDTO;
 import com.test.pet.model.PetBoardDetailDTO;
 import com.test.pet.model.PetDTO;
@@ -28,10 +29,17 @@ public class PetBoardController {
 
 	//유기동물 목록 컨트롤러
 	@GetMapping("/petboard.do")
-	public String petBoardList(Model model) {
-		List<PetBoardDTO> petList = petBoardListService.getAllPetBoard();
+	public String petBoardList(@RequestParam(defaultValue = "1") int page, Model model) {
+		int pageSize = 12;
+		int totalPetCount = petBoardListService.getTotalPetCount();
+
+		List<PetBoardDTO> petList = petBoardListService.getPetBoardList(page, pageSize);
+
+		PageDTO pageInfo = new PageDTO(page, pageSize, totalPetCount);
 
 		model.addAttribute("petList", petList);
+		model.addAttribute("pageInfo", pageInfo);
+
 		return "board/petboard";
 	}
 
