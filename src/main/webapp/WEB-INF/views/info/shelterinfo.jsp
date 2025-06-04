@@ -150,7 +150,7 @@
        <div class="shelter-container">
            <!-- 지도와 tbody를 수평 정렬 -->
            <div class="shelter-wrapper">
-               <div id="map" style="width:800px; height:1100px;"></div>
+               <div id="map" style="width:800px; height:1100px; border-radius: 25px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);"></div>
 
                <table class="table-body">
                    <tbody>
