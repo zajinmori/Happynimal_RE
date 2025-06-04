@@ -1,4 +1,4 @@
-package com.test.pet.service.impl;
+package com.test.pet.service.Impl;
 
 import com.test.pet.mapper.PetBoardInsertMapper;
 import com.test.pet.mapper.PetImageMapper;
