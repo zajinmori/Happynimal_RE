@@ -5,6 +5,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+
+
+    .content td{
+        border: 1px solid black;
+        padding: 8px 12px;
+        text-align: center;
+    }
+
+    .shelter-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px; /* 지도와 표 사이 간격 */
+        margin-top: 50px; /* 위와의 간격 */
+        margin-bottom: 50px;
+        padding: 0 20px;
+    }
+
+    .table-body {
+        border: none;
+        border-collapse: collapse;
+    }
+
+    .table-body td,
+    .table-body th {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        padding: 12px 20px;
+        text-align: center;
+    }
+
+
+</style>
+
     <head>
         <meta charset="utf-8">
         <title>Happynimal</title>
@@ -111,9 +146,30 @@
 
        <%--Map 들어갑니다--%>
 
-       <div style="display: flex; justify-content: center;">
-           <div id="map" style="width:1200px; height:1000px;"></div>
+       <!-- 전체 컨테이너 -->
+       <div class="shelter-container">
+           <!-- 지도와 tbody를 수평 정렬 -->
+           <div class="shelter-wrapper">
+               <div id="map" style="width:800px; height:1100px;"></div>
+
+               <table class="table-body">
+                   <tbody>
+                   <c:if test="${not empty shelterLocations}">
+                       <c:forEach items="${shelterLocations}" var="loc" varStatus="status">
+                           <tr class="content">
+                               <td><a href="#" class="shelter-link" data-index="${status.index}">${loc.name}</a></td>
+                               <td>${loc.address}</td>
+                               <td>${loc.telephone}</td>
+                           </tr>
+                       </c:forEach>
+                   </c:if>
+                   </tbody>
+               </table>
+           </div>
        </div>
+
+
+
 
 
 
@@ -160,12 +216,82 @@
 
        <script>
 
-               var container = document.getElementById('map');
-               var options = {
-                   center: new kakao.maps.LatLng(37.5665, 126.9780),
-                   level: 3
-               };
-               var map = new kakao.maps.Map(container, options);
+           var container = document.getElementById('map');
+           var options = {
+               center: new kakao.maps.LatLng(37.5665, 126.9780),
+               level: 9
+           };
+           var map = new kakao.maps.Map(container, options);
+
+           // 보호소 정보 배열
+           const locations = [
+               <c:forEach var="loc" items="${shelterLocations}" varStatus="status">
+               {
+                   name: "<c:out value='${loc.name}'/>",
+                   lat: ${loc.latitude},
+                   lng: ${loc.longitude},
+                   address: "<c:out value='${loc.address}'/>",
+                   tel: "<c:out value='${loc.telephone}'/>"
+               }<c:if test="${!status.last}">,</c:if>
+               </c:forEach>
+           ];
+
+           let markers = [];
+           let infowindows = [];
+           let currentInfowindow = null;
+
+           locations.forEach(function(loc, index) {
+               const marker = new kakao.maps.Marker({
+                   map: map,
+                   position: new kakao.maps.LatLng(loc.lat, loc.lng),
+                   title: loc.name
+               });
+
+               const iwContent =
+                   '<div style="padding:10px; width:200px; background-color:#FFFBE6; border:2px solid #00712D; box-shadow: none;">' +
+                   '<b style="color:#ff9100; font-size:16px;">' + loc.name + '</b><br>' +
+                   '<span style="color:#333; font-size:14px;">' + loc.address + '</span><br>' +
+                   '<span style="color:#555; font-size:13px;">' +
+                   (loc.tel && loc.tel.trim() !== '' ? loc.tel : '전화번호 없음') +
+                   '</span>' +
+                   '</div>';
+
+               const infowindow = new kakao.maps.InfoWindow({
+                   content: iwContent
+               });
+
+               kakao.maps.event.addListener(marker, 'click', function () {
+                   if (currentInfowindow) {
+                       currentInfowindow.close();
+                   }
+
+                   map.setCenter(marker.getPosition());
+                   infowindow.open(map, marker);
+                   currentInfowindow = infowindow;
+               });
+
+               // 배열 저장
+               markers.push(marker);
+               infowindows.push(infowindow);
+           });
+
+           document.querySelectorAll('.shelter-link').forEach((el) => {
+               el.addEventListener('click', function (e) {
+                   e.preventDefault();
+
+                   const index = parseInt(this.dataset.index, 10);
+                   const marker = markers[index];
+                   const infowindow = infowindows[index];
+
+                   if (currentInfowindow) {
+                       currentInfowindow.close();
+                   }
+
+                   map.setCenter(marker.getPosition());
+                   infowindow.open(map, marker);
+                   currentInfowindow = infowindow;
+               });
+           });
 
        </script>
 
