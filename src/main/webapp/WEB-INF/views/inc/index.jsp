@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +89,21 @@
                         </div>
                     </div>
                     
-                    <a href="login.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
+                    <%--로그인 상태일때--%>
+                    <sec:authorize access="isAuthenticated()">
+                        <form action="${pageContext.request.contextPath}/logout" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">
+                                로그아웃
+                            </button>
+                        </form>
+                    </sec:authorize>
+
+                    <%--비로그인 상태일 때--%>
+                    <sec:authorize access="isAnonymous()">
+                        <a href="login.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">
+                            로그인
+                        </a>
+                    </sec:authorize>
                 </div>
             </nav>
 
