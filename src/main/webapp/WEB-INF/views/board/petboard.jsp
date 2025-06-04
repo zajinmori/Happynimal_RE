@@ -4,6 +4,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<style>
+    .custom-img {
+        width: 100%;
+        height: 280px;         /* 원하는 높이로 조절 */
+        object-fit: cover;
+        border-radius: 10px;   /* 예쁘게 라운딩 */
+    }
+
+</style>
+
 <head>
     <meta charset="utf-8">
     <title>Happynimal</title>
@@ -48,6 +59,7 @@
         <a href="index.do" class="navbar-brand p-0">
             <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
             <!-- <img src="img/logo.png" alt="Logo"> -->
+
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="fa fa-bars"></span>
@@ -74,6 +86,7 @@
                         <a href="volunteerboard.do" class="dropdown-item active">봉사활동 모집</a>
                         <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
                     </div>
+
                 </div>
                 <a href="shelter.do" class="nav-item nav-link">보호소 및 병원</a>
                 <a href="donation.do" class="nav-item nav-link">후원</a>
@@ -81,8 +94,8 @@
             <div class="d-none d-xl-flex me-3">
                 <div class="d-flex flex-column pe-3 border-end border-primary">
 
-                </div>
-            </div>
+
+
 
             <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
         </div>
@@ -91,11 +104,11 @@
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
         <div class="container text-center py-5" style="max-width: 900px;">
-            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">봉사활동 모집</h4>
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">기다리는 친구들</h4>
             <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
                 <li class="breadcrumb-item"><a href="index.do">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Activity</a></li>
-                <li class="breadcrumb-item active text-primary">VolunteerBoard</li>
+                <li class="breadcrumb-item"><a href="#">Adoption</a></li>
+                <li class="breadcrumb-item active text-primary">PetBoard</li>
             </ol>
         </div>
     </div>
@@ -115,8 +128,11 @@
                 <div class="input-group w-75 mx-auto d-flex">
                     <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
                     <span id="search-icon-1" class="input-group-text btn border p-3"><i class="fa fa-search text-white"></i></span>
+
                 </div>
             </div>
+
+            <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
         </div>
     </div>
 </div>
@@ -124,54 +140,49 @@
 
 <!-- About Start -->
 <div class="board-container">
-    <h1 class="board-title">기다리는 친구들</h1>
 
-    <!-- <div class="search-bar">
-        <input type="text" placeholder="검색어를 입력하세요" />
-        <button>검색</button>
-    </div> -->
 
-    <table class="board-table">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:if test="${not empty volunteerList}">
-            <c:forEach items="${volunteerList}" var="VolunteerBoardDTO">
-                <tr>
-                    <td>${VolunteerBoardDTO.seq}</td>
-                    <td><a href="volunteerdetail.do?seq=${VolunteerBoardDTO.seq}">${VolunteerBoardDTO.title}</a></td>
-                    <td>${VolunteerBoardDTO.idMemberShelter}</td>
-                    <td>${VolunteerBoardDTO.regdate}</td>
-                </tr>
+    <div class="container mt-5">
+        <div class="row">
+            <c:forEach var="pet" items="${petList}">
+                <div class="col-md-4 mb-4 d-flex">
+                    <div class="card h-100 shadow-sm w-100">
+                        <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top custom-img" alt="동물 이미지">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">${pet.name}</h5>
+                            <p class="card-text">나이: ${pet.age}살</p>
+                            <p class="card-text">보호소: ${pet.shelterName}</p>
+                            <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
+                        </div>
+                    </div>
+
+                </div>
             </c:forEach>
-        </c:if>
-
-        <a href="petadd.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">
-            유기동물 등록
-        </a>
-
-        </tbody>
-    </table>
+        </div>
+    </div>
+</div>
 
 
+    <div class="text-center my-4">
+        <a href="petadd.do" class="btn btn-primary btn-lg">게시글 등록</a>
+    </div>
 
-    <!-- About End -->
+<div class="pagination mt-4 text-center">
+    <c:if test="${pageInfo.startPage > 1}">
+        <a href="petboard.do?page=${pageInfo.startPage - 1}">이전</a>
+    </c:if>
 
-    <!-- Fact Counter -->
+    <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i">
+        <a href="petboard.do?page=${i}" class="${i == pageInfo.currentPage ? 'active' : ''}">${i}</a>
+    </c:forEach>
 
-    <!-- Fact Counter -->
+    <c:if test="${pageInfo.endPage < pageInfo.totalPage}">
+        <a href="petboard.do?page=${pageInfo.endPage + 1}">다음</a>
+    </c:if>
+</div>
 
-    <!-- feature Start -->
 
-    <!-- feature End -->
 
-    <!-- Footer Start -->
 
     <!-- Copyright Start -->
     <div class="container-fluid copyright py-4">
@@ -180,20 +191,19 @@
                 <div class="col-md-6 text-center text-md-start mb-md-0">
                     <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
                 </div>
-                <div class="col-md-6 text-center text-md-end text-body">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                    Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+                <div class="col-md-6 text-center text-md-end text-body">            
+
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
+
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
 
 
     <!-- JavaScript Libraries -->
@@ -206,7 +216,9 @@
     <script src="<c:url value='/resources/lib/owlcarousel/owl.carousel.min.js'/>"></script>
 
 
-    <!-- Template Javascript -->
+
+
+
     <script src="<c:url value='/resources/js/main.js'/>"></script>
 </body>
 

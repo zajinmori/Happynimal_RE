@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.pet.mapper.PetBoardDetailMapper">
+
+    <resultMap id="petWithImagesResultMap" type="com.test.pet.model.PetBoardDetailDTO">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="age" column="age" />
+        <result property="gender" column="gender" />
+        <result property="neutered" column="neutered" />
+        <result property="weight" column="weight" />
+        <result property="detail" column="detail" />
+        <result property="location" column="location" />
+        <result property="shelterName" column="shelterName" />
+        <result property="regdate" column="regdate" />
+        <result property="petInfo" column="petInfo" />
+
+        <collection property="images" ofType="com.test.pet.model.ImageDTO" >
+            <id property="seq" column="image_seq" />
+            <result property="image" column="image_url" />
+        </collection>
+    </resultMap>
+
+    <select id="selectPetBoardDetail" resultMap="petWithImagesResultMap">
+        select
+            p.id, p.name, p.gender, p.age, p.neutered, p.weight, p.detail,
+            p.location,
+            s.name AS shelterName,
+            p.regdate, p.petinfo,
+
+            i.seq as image_seq,
+            i.image as image_url
+
+            from pet2 p
+            left join pet_image pi ON p.id = pi.seqpet
+            left join image i ON pi.seqimage = i.seq
+            left join shelter s ON p.SEQSHELTERID = s.seq
+        where p.id = #{id}
+    </select>
+
+</mapper>
