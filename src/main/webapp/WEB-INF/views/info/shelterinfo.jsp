@@ -18,7 +18,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 40px; /* 지도와 표 사이 간격 */
         margin-top: 50px; /* 위와의 간격 */
         margin-bottom: 50px;
         padding: 0 20px;
@@ -27,6 +26,7 @@
     .table-body {
         border: none;
         border-collapse: collapse;
+        background-color: white;
     }
 
     .table-body td,
@@ -147,26 +147,30 @@
        <%--Map 들어갑니다--%>
 
        <!-- 전체 컨테이너 -->
-       <div class="shelter-container">
-           <!-- 지도와 tbody를 수평 정렬 -->
-           <div class="shelter-wrapper">
-               <div id="map" style="width:800px; height:1100px; border-radius: 25px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);"></div>
+               <div class="shelter-container">
+                   <div class="shelter-wrapper">
+                       <div id="map" style="width:800px; height:1100px; border-radius: 25px; box-shadow: 2px 5px 15px rgba(0,0,0,0.25); position: relative; z-index: 2; "></div>
 
-               <table class="table-body">
-                   <tbody>
-                   <c:if test="${not empty shelterLocations}">
-                       <c:forEach items="${shelterLocations}" var="loc" varStatus="status">
-                           <tr class="content">
-                               <td><a href="#" class="shelter-link" data-index="${status.index}">${loc.name}</a></td>
-                               <td>${loc.address}</td>
-                               <td>${loc.telephone}</td>
-                           </tr>
-                       </c:forEach>
-                   </c:if>
-                   </tbody>
-               </table>
-           </div>
-       </div>
+                       <div class="tb_wrap" style="max-height: 1100px; overflow-y: auto; padding: 55px 65px; background: #fff; border-raidus: 0 25px 25px 0; ransform: translateX(-50px); padding-left: 100px; box-sizing: border-box; ">
+                           <div class="scr_wrap" style="width: 100%; height: 100%;">
+                               <table class="table-body">
+                                   <tbody>
+                                   <c:if test="${not empty shelterLocations}">
+                                       <c:forEach items="${shelterLocations}" var="loc" varStatus="status">
+                                           <tr class="content">
+                                               <td><a href="#" class="shelter-link" data-index="${status.index}">${loc.name}</a></td>
+                                               <td>${loc.address}</td>
+                                               <td>${loc.telephone}</td>
+                                           </tr>
+                                       </c:forEach>
+                                   </c:if>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
 
 
 
@@ -248,7 +252,8 @@
                });
 
                const iwContent =
-                   '<div style="padding:10px; width:200px; background-color:#FFFBE6; border:2px solid #00712D; box-shadow: none;">' +
+                   '<div style="padding:10px; width:200px; background:#FFFBE6; ' +
+                   'box-shadow: 0 0 0 2px #00712D; border-radius: 8px;">' +
                    '<b style="color:#ff9100; font-size:16px;">' + loc.name + '</b><br>' +
                    '<span style="color:#333; font-size:14px;">' + loc.address + '</span><br>' +
                    '<span style="color:#555; font-size:13px;">' +
@@ -257,7 +262,8 @@
                    '</div>';
 
                const infowindow = new kakao.maps.InfoWindow({
-                   content: iwContent
+                   content: iwContent,
+                   removable: true
                });
 
                kakao.maps.event.addListener(marker, 'click', function () {
