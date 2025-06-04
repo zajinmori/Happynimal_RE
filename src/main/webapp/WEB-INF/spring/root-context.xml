@@ -2,25 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.0.xsd
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
+
 	<!-- HikariCP -->
 	<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
 
- 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"></property> 
+ 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 
 
-		<property name="username" value="happynimalTest"></property>
-		<property name="password" value="java1234"></property>
+		<property name="username" value="happynimalTest"/>
+		<property name="password" value="java1234"/>
 	</bean>
 	
 	<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource">
-		<constructor-arg ref="hikariConfig"></constructor-arg>
+		<constructor-arg ref="hikariConfig"/>
 	</bean>
 	
 	<!--
@@ -30,12 +30,12 @@
 	 				- Connection 관리하는 역할(연결)
 	  -->
 				<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sessionFactory">
-					<property name="dataSource" ref="dataSource"></property>
-					<property name="mapperLocations" value="classpath*:mapper/*.xml"></property>
+					<property name="dataSource" ref="dataSource"/>
+					<property name="mapperLocations" value="classpath*:mapper/*.xml"/>
 				</bean> <!-- "mapperLocations" = mybatis.xml -->
 				
 				<bean class="org.mybatis.spring.SqlSessionTemplate">
-					<constructor-arg ref="sessionFactory"></constructor-arg>
+					<constructor-arg ref="sessionFactory"/>
 				</bean>
 		
 		
@@ -44,9 +44,11 @@
     		<property name="basePackage" value="com.test.pet.mapper" />
 		</bean>
 
+
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="10485760"/>
 	</bean>
+
 
 
 

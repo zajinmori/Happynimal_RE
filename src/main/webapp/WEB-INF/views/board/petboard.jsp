@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <style>
     .custom-img {
         width: 100%;
@@ -13,6 +14,7 @@
     }
 
 </style>
+
 <head>
     <meta charset="utf-8">
     <title>Happynimal</title>
@@ -84,6 +86,7 @@
                         <a href="volunteerboard.do" class="dropdown-item active">봉사활동 모집</a>
                         <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
                     </div>
+
                 </div>
                 <a href="shelter.do" class="nav-item nav-link">보호소 및 병원</a>
                 <a href="donation.do" class="nav-item nav-link">후원</a>
@@ -91,8 +94,8 @@
             <div class="d-none d-xl-flex me-3">
                 <div class="d-flex flex-column pe-3 border-end border-primary">
 
-                </div>
-            </div>
+
+
 
             <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
         </div>
@@ -125,8 +128,11 @@
                 <div class="input-group w-75 mx-auto d-flex">
                     <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
                     <span id="search-icon-1" class="input-group-text btn border p-3"><i class="fa fa-search text-white"></i></span>
+
                 </div>
             </div>
+
+            <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
         </div>
     </div>
 </div>
@@ -149,6 +155,7 @@
                             <a href="petdetail.do?seq=${pet.id}" class="btn btn-primary">상세보기</a>
                         </div>
                     </div>
+
                 </div>
             </c:forEach>
         </div>
@@ -176,6 +183,7 @@
 
 
 
+
     <!-- Copyright Start -->
     <div class="container-fluid copyright py-4">
         <div class="container">
@@ -183,20 +191,19 @@
                 <div class="col-md-6 text-center text-md-start mb-md-0">
                     <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
                 </div>
-                <div class="col-md-6 text-center text-md-end text-body">
-                    <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                    <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                    <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                <div class="col-md-6 text-center text-md-end text-body">            
+
 
                 </div>
             </div>
         </div>
     </div>
-    <!-- Copyright End -->
+
 
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>
+
 
 
     <!-- JavaScript Libraries -->
@@ -207,6 +214,8 @@
     <script src="<c:url value='/resources/lib/waypoints/waypoints.min.js'/>"></script>
     <script src="<c:url value='/resources/lib/counterup/counterup.min.js'/>"></script>
     <script src="<c:url value='/resources/lib/owlcarousel/owl.carousel.min.js'/>"></script>
+
+
 
 
 
