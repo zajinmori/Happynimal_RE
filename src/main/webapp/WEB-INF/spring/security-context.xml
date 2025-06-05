@@ -38,7 +38,7 @@
 
     <!-- 사용자 인증 처리기 설정 -->
     <security:authentication-manager>
-        <security:authentication-provider user-service-ref="memberAuthService">
+        <security:authentication-provider user-service-ref="memberAuth">
             <security:password-encoder ref="bcryptPasswordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>

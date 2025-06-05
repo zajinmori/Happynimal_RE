@@ -1,4 +1,4 @@
-package com.test.pet.service;
+package com.test.pet.security;
 
 import com.test.pet.mapper.AdminMapper;
 import com.test.pet.mapper.UserMapper;
@@ -10,11 +10,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
+
+
 import java.util.ArrayList;
 
 
-@Service("memberAuthService")
-public class MemberAuthService implements UserDetailsService {
+@Service
+public class MemberAuth implements UserDetailsService {
 
     // DB에서 정보를 가져오기 위해 주입
     @Autowired
@@ -28,6 +30,7 @@ public class MemberAuthService implements UserDetailsService {
 
         System.out.println("로그인 시도: " + username); //디버깅
 
+
         //권한(ROLE)을 담을 리스트 만들기
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();
 
@@ -38,32 +41,28 @@ public class MemberAuthService implements UserDetailsService {
             //SimpleGrantedAuthority = Spring Security가 권한을 알게 만들어줌)
             authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
-            return new org.springframework.security.core.userdetails.User(
+            return new CustomUserDetails(
                     admin.getId(),
                     admin.getPassword(),
-                    true,
-                    true,
-                    true,
-                    true,
+                    admin.getNickname(),
                     authorities
             );
         }
+
 
         //일반사용자 테이블에서 찾기
         UserDTO user = userMapper.findByUserId(username);
 
         if(user != null && user.getStatus() == 1){
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-            return new org.springframework.security.core.userdetails.User(
+            return new CustomUserDetails(
                     user.getId(),
                     user.getPassword(),
-                    true,
-                    true,
-                    true,
-                    true,
+                    user.getNickname(),
                     authorities
             );
         }
+
        throw new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + username);
     }
 }
