@@ -67,10 +67,6 @@
     <div class="container py-5" id="detail-table-container">
     
         <table id="detail-table">
-        	<tr class="table-row">
-                <th class="table-header">번호</th>
-                <td class="table-data" id="detail-seq">${VolunteerListDTO.seq}</td>
-            </tr>
             <tr class="table-row">
                 <th class="table-header">제목</th>
                 <td class="table-data" id="detail-title">${VolunteerListDTO.title}</td>
@@ -80,34 +76,30 @@
                 <td class="table-data" id="detail-id">${VolunteerListDTO.idMemberShelter}</td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">날짜</th>
-                <td class="table-data" id="detail-regdate">${VolunteerListDTO.regdate}</td>
-            </tr>
-            <tr class="table-row">
                 <th class="table-header">내용</th>
                 <td class="table-data" id="detail-content">
                     <div id="content-text">${VolunteerListDTO.content}</div>
                 </td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">봉사시작일</th>
-                <td class="table-data" id="detail-volunteer-start">${VolunteerListDTO.dateVolunteerStart}</td>
+                <th class="table-header">봉사 기간</th>
+                <td class="table-data">
+                    ${VolunteerListDTO.dateVolunteerStart} ~ ${VolunteerListDTO.dateVolunteerEnd}
+                </td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">봉사종료일</th>
-                <td class="table-data" id="detail-volunteer-end">${VolunteerListDTO.dateVolunteerEnd}</td>
-            </tr>
-            <tr class="table-row">
-                <th class="table-header">모집시작일</th>
-                <td class="table-data" id="detail-recruit-start">${VolunteerListDTO.dateRecruitStart}</td>
-            </tr>
-            <tr class="table-row">
-                <th class="table-header">모집종료일</th>
-                <td class="table-data" id="detail-recruit-end">${VolunteerListDTO.dateRecruitEnd}</td>
+                <th class="table-header">모집 기간</th>
+                <td class="table-data">
+                    ${VolunteerListDTO.dateRecruitStart} ~ ${VolunteerListDTO.dateRecruitEnd}
+                </td>
             </tr>
             <tr class="table-row">
                 <th class="table-header">모집인원</th>
-                <td class="table-data" id="detail-num-count">${VolunteerListDTO.numCount}</td>
+                <td class="table-data" id="detail-num-count">${VolunteerListDTO.numCount}명</td>
+            </tr>
+            <tr class="table-row">
+                <th class="table-header">등록일자</th>
+                <td class="table-data" id="detail-regdate">${VolunteerListDTO.regdate}</td>
             </tr>
         </table>
         

@@ -2,6 +2,7 @@ package com.test.pet.controller;
 
 import java.util.List;
 
+import com.test.pet.service.VolunteerBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.test.pet.dao.VolunteerListDAO;
 import com.test.pet.model.VolunteerBoardDTO;
 
 
@@ -24,7 +23,7 @@ import com.test.pet.model.VolunteerBoardDTO;
 public class VolunteerBoardController {
 
     @Autowired
-    private VolunteerListDAO volunteerListDAO;
+    private VolunteerBoardService volunteerBoardService;
 
     /**
      * 자원봉사 게시판 목록을 표시합니다.
@@ -34,7 +33,7 @@ public class VolunteerBoardController {
      */
     @GetMapping("/volunteerboard.do")
     public String volunteerboard(Model model) {
-        List<VolunteerBoardDTO> volunteerList = volunteerListDAO.getVolunteerList();
+        List<VolunteerBoardDTO> volunteerList = volunteerBoardService.getVolunteerBoardList();
         model.addAttribute("volunteerList", volunteerList);
         return "board/volunteerboard"; // 목록 페이지
     }
@@ -48,7 +47,7 @@ public class VolunteerBoardController {
      */
     @GetMapping("/volunteerdetail.do")
     public String volunteerdetail(Model model, String seq) {
-        VolunteerBoardDTO dto = volunteerListDAO.get(seq);
+        VolunteerBoardDTO dto = volunteerBoardService.getVolunteerBoardDetail(seq);
         model.addAttribute("VolunteerListDTO", dto);
         return "board/volunteerdetail";
     }
@@ -73,7 +72,7 @@ public class VolunteerBoardController {
      */
     @PostMapping("/volunteeraddok")
     public String volunteeraddok(Model model, VolunteerBoardDTO dto) {
-        int result = volunteerListDAO.add(dto);
+        int result = volunteerBoardService.addVolunteerBoard(dto);
         return "redirect:/volunteerboard.do";
     }
 
@@ -86,7 +85,7 @@ public class VolunteerBoardController {
      */
     @GetMapping("/volunteeredit.do")
     public String volunteeredit(Model model, @RequestParam("seq") String seq) {
-        VolunteerBoardDTO dto = volunteerListDAO.get(seq);
+        VolunteerBoardDTO dto = volunteerBoardService.getVolunteerBoardDetail(seq);
         model.addAttribute("VolunteerListDTO", dto);
         return "board/volunteeredit";
     }
@@ -100,7 +99,7 @@ public class VolunteerBoardController {
      */
     @PostMapping("/volunteereditok.do")
     public String volunteerediteok(Model model, @ModelAttribute VolunteerBoardDTO dto) {
-        int result = volunteerListDAO.volunteeredit(dto);
+        int result = volunteerBoardService.editVolunteerBoard(dto);
         return "redirect:/volunteerdetail.do?seq=" + dto.getSeq();
     }
 
@@ -114,7 +113,7 @@ public class VolunteerBoardController {
      */
     @GetMapping("/volunteerdel.do")
     public String volunteerdel(Model model, @RequestParam("seq") String seq, String id) {
-        VolunteerBoardDTO dto = volunteerListDAO.get(seq);
+        VolunteerBoardDTO dto = volunteerBoardService.getVolunteerBoardDetail(seq);
         model.addAttribute("VolunteerListDTO", dto);
         return "board/volunteerdel";
     }
@@ -129,7 +128,7 @@ public class VolunteerBoardController {
     @PostMapping("/volunteerdelok.do")
     public String volunteerdelok(Model model, VolunteerBoardDTO dto) {
         System.out.println("삭제 번호: " + dto.getSeq()); // seq 값 출력
-        int result = volunteerListDAO.volunteerdel(dto);
+        int result = volunteerBoardService.deleteVolunteerBoard(dto);
         System.out.println("삭제 결과: " + result);
         return "redirect:/volunteerboard.do";
     }
