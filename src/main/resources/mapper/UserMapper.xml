@@ -7,11 +7,12 @@
             <id property="id" column="id"/>
             <result property="password" column="password"/>
             <result property="status" column="status"/>
+            <result property="nickname" column="nickname"/>
         </resultMap>
 
         <!--일반사용자 로그인-->
         <select id = "findByUserId" resultMap="userResultMap">
-            select id, password, status from membergeneral where id = #{id}
+            select id, password, status, nickname from membergeneral where id = #{id}
         </select>
 
         <!--일반 사용자 회원가입-->

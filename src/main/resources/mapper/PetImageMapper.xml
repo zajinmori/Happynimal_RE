@@ -15,6 +15,11 @@
         VALUES (#{seq}, #{image})
     </insert>
 
+    <resultMap id="imageResultMap" type="com.test.pet.model.ImageDTO">
+        <result property="seq" column="seq"/>
+        <result property="image" column="image"/>
+    </resultMap>
+
     <select id="selectImagesByPetId" parameterType="long" resultType="com.test.pet.model.ImageDTO">
         select i.seq, i.image
         from pet_image pi
