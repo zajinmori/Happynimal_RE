@@ -169,7 +169,7 @@
         <div class="card-image-container">
             <c:forEach var="img" items="${pet.images}" varStatus="status">
                 <div class="dcard-image ${status.index == 0 ? 'active' : ''}">
-                    <img src="${pageContext.request.contextPath}/upload/${img.image}" alt="동물사진 ${status.index}">
+                    <img src="${img.url}" alt="동물사진 ${status.index}">
                 </div>
             </c:forEach>
         </div>

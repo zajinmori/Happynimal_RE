@@ -28,6 +28,9 @@ public class PetBoardController {
 	@Autowired
 	PetBoardRegisterService petBoardRegisterService;
 
+	@Autowired
+	PetBoardDetailService petBoardDetailService;
+
 
 	//유기동물 목록 컨트롤러
 	@GetMapping("/petboard.do")
@@ -95,7 +98,7 @@ public class PetBoardController {
 
 	@GetMapping("/petdetail.do")
 	public String petDetail(@RequestParam("seq") Long id, Model model) {
-		PetBoardDetailDTO dto = petBoardListService.getPetBoardDetail(id);
+		PetBoardDetailDTO dto = petBoardDetailService.getPetBoardDetail(id);
 		model.addAttribute("pet", dto);
 		return "board/petboarddetail";
 	}

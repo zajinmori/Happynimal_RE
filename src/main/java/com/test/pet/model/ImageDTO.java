@@ -7,4 +7,5 @@ public class ImageDTO {
 
     private Long seq;
     private String image;
+    private String url;
 }

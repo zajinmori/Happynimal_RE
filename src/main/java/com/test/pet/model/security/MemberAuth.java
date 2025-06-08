@@ -1,4 +1,4 @@
-package com.test.pet.security;
+package com.test.pet.model.security;
 
 import com.test.pet.mapper.AdminMapper;
 import com.test.pet.mapper.UserMapper;

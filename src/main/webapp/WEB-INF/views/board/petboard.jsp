@@ -107,7 +107,7 @@
             <c:forEach var="pet" items="${petList}">
                 <div class="col-md-4 mb-4 d-flex">
                     <div class="card h-100 shadow-sm w-100">
-                        <img src="${pageContext.request.contextPath}/upload/${pet.randomImage}" class="card-img-top custom-img" alt="동물 이미지">
+                        <img src="${pet.randomImage}" class="card-img-top custom-img" alt="동물 이미지">
                         <div class="card-body text-center">
                             <h5 class="card-title">${pet.name}</h5>
                             <p class="card-text">나이: ${pet.age}살</p>
