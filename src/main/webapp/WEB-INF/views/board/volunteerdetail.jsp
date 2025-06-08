@@ -45,49 +45,7 @@
 
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.do" class="navbar-brand p-0">
-                    <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                         <a href="index.do" class="nav-item nav-link">Home</a>
-                        <a href="about.do" class="nav-item nav-link">소개</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">입양</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="adoptioninfo.do" class="dropdown-item">입양안내</a>
-                                <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
-                                <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                                <a href="review.do" class="dropdown-item ">입양후기</a>
-                            </div>
-                        </div>
-                        
-        
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">활동</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="volunteerinfo.do" class="dropdown-item">봉사활동 안내</a>
-                                <a href="volunteerboard.do" class="dropdown-item active">봉사활동 모집</a>
-                                <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
-                            </div>
-                        </div>
-                        <a href="shelter.do" class="nav-item nav-link">보호소 및 병원</a>
-                        <a href="donation.do" class="nav-item nav-link">후원</a>
-                    </div>
-                    <div class="d-none d-xl-flex me-3">
-                        <div class="d-flex flex-column pe-3 border-end border-primary">
-                           
-                        </div>
-                    </div>
-                    
-                    <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
-                </div>
-            </nav>
+            <jsp:include page="/WEB-INF/views/common/nav.jsp" />
 
             <!-- Header Start -->
             <div class="container-fluid bg-breadcrumb">
@@ -109,10 +67,6 @@
     <div class="container py-5" id="detail-table-container">
     
         <table id="detail-table">
-        	<tr class="table-row">
-                <th class="table-header">번호</th>
-                <td class="table-data" id="detail-seq">${VolunteerListDTO.seq}</td>
-            </tr>
             <tr class="table-row">
                 <th class="table-header">제목</th>
                 <td class="table-data" id="detail-title">${VolunteerListDTO.title}</td>
@@ -122,34 +76,30 @@
                 <td class="table-data" id="detail-id">${VolunteerListDTO.idMemberShelter}</td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">날짜</th>
-                <td class="table-data" id="detail-regdate">${VolunteerListDTO.regdate}</td>
-            </tr>
-            <tr class="table-row">
                 <th class="table-header">내용</th>
                 <td class="table-data" id="detail-content">
                     <div id="content-text">${VolunteerListDTO.content}</div>
                 </td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">봉사시작일</th>
-                <td class="table-data" id="detail-volunteer-start">${VolunteerListDTO.dateVolunteerStart}</td>
+                <th class="table-header">봉사 기간</th>
+                <td class="table-data">
+                    ${VolunteerListDTO.dateVolunteerStart} ~ ${VolunteerListDTO.dateVolunteerEnd}
+                </td>
             </tr>
             <tr class="table-row">
-                <th class="table-header">봉사종료일</th>
-                <td class="table-data" id="detail-volunteer-end">${VolunteerListDTO.dateVolunteerEnd}</td>
-            </tr>
-            <tr class="table-row">
-                <th class="table-header">모집시작일</th>
-                <td class="table-data" id="detail-recruit-start">${VolunteerListDTO.dateRecruitStart}</td>
-            </tr>
-            <tr class="table-row">
-                <th class="table-header">모집종료일</th>
-                <td class="table-data" id="detail-recruit-end">${VolunteerListDTO.dateRecruitEnd}</td>
+                <th class="table-header">모집 기간</th>
+                <td class="table-data">
+                    ${VolunteerListDTO.dateRecruitStart} ~ ${VolunteerListDTO.dateRecruitEnd}
+                </td>
             </tr>
             <tr class="table-row">
                 <th class="table-header">모집인원</th>
-                <td class="table-data" id="detail-num-count">${VolunteerListDTO.numCount}</td>
+                <td class="table-data" id="detail-num-count">${VolunteerListDTO.numCount}명</td>
+            </tr>
+            <tr class="table-row">
+                <th class="table-header">등록일자</th>
+                <td class="table-data" id="detail-regdate">${VolunteerListDTO.regdate}</td>
             </tr>
         </table>
         

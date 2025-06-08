@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           https://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           https://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/security
+           https://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+    <context:component-scan base-package="com.test.pet" />
+
+    <!-- 1. URL 보안 및 로그인/로그아웃 설정 -->
+    <security:http auto-config="true" use-expressions="true">
+        <security:csrf disabled="true"/>
+        <security:intercept-url pattern="/login.do" access="permitAll"/>
+        <security:intercept-url pattern="/resources/**" access="permitAll" />
+        <security:intercept-url pattern="/index.do" access="permitAll"/>
+        <security:intercept-url pattern="/applicationadoption.do" access="isAuthenticated()"/>
+        <security:form-login
+                login-page="/login.do"
+                login-processing-url="/login.do"
+                default-target-url="/index.do"
+                always-use-default-target="true"
+                authentication-failure-url="/login.do?error=true"
+                username-parameter="username"
+                password-parameter="password" />
+
+        <security:logout
+                logout-url="/logout"
+                logout-success-url="/index.do"
+                invalidate-session="true"
+                delete-cookies="JSESSIONID"/>
+    </security:http>
+
+    <!-- 사용자 인증 처리기 설정 -->
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="memberAuth">
+            <security:password-encoder ref="bcryptPasswordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <!-- 테스트용: NoOpPasswordEncoder(비밀번호 암호화X) 사용 -->
+    <!--<bean id="bcryptPasswordEncoder"
+          class="org.springframework.security.crypto.password.NoOpPasswordEncoder"
+          factory-method="getInstance" />-->
+
+    <!-- 비밀번호 암호화기 등록 -->
+    <bean id="bcryptPasswordEncoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+
+
+</beans>
