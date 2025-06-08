@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.test.pet"},{"l":"com.test.pet.controller"},{"l":"com.test.pet.dao"},{"l":"com.test.pet.mapper"},{"l":"com.test.pet.model"},{"l":"com.test.pet.service"}]
