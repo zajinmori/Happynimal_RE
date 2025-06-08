@@ -1,4 +1,4 @@
-package com.test.pet.security;
+package com.test.pet.model.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;

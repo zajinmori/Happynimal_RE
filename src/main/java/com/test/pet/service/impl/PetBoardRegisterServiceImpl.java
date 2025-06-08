@@ -1,5 +1,6 @@
 package com.test.pet.service.Impl;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.test.pet.mapper.PetBoardInsertMapper;
 import com.test.pet.mapper.PetImageMapper;
 import com.test.pet.mapper.PetImageRelationMapper;
@@ -7,7 +8,7 @@ import com.test.pet.model.ImageDTO;
 import com.test.pet.model.PetDTO;
 import com.test.pet.model.PetImageDTO;
 import com.test.pet.service.PetBoardRegisterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,26 +20,44 @@ import java.util.UUID;
 @Service
 public class PetBoardRegisterServiceImpl implements PetBoardRegisterService {
 
-    @Autowired
-    private PetBoardRegisterService petBoardRegisterService;
+    private final AmazonS3 amazonS3;
+    private final PetBoardInsertMapper petBoardInsertMapper;
+    private final PetImageMapper petImageMapper;
+    private final PetImageRelationMapper petImageRelationMapper;
+    private final ServletContext servletContext;
+    private final String bucketName;
+
+    public PetBoardRegisterServiceImpl(
+            AmazonS3 amazonS3,
+            PetBoardInsertMapper petBoardInsertMapper,
+            PetImageMapper petImageMapper,
+            PetImageRelationMapper petImageRelationMapper,
+            ServletContext servletContext,
+            @Value("${aws.bucketName}") String bucketName
+    ) {
+        this.amazonS3 = amazonS3;
+        this.petBoardInsertMapper = petBoardInsertMapper;
+        this.petImageMapper = petImageMapper;
+        this.petImageRelationMapper = petImageRelationMapper;
+        this.servletContext = servletContext;
+        this.bucketName = bucketName;
+    }
+
 
 
     @Override
     public void registerPetWithImages(PetDTO petDTO, MultipartFile[] images) throws IOException{
-        petBoardRegisterService.registerPet(petDTO);
+        this.registerPet(petDTO);
 
         for(MultipartFile file : images){
             if(!file.isEmpty()){
-                ImageDTO image = petBoardRegisterService.saveImage(file);
-                petBoardRegisterService.linkPetAndImage(petDTO.getId(), image.getSeq());
+                ImageDTO image = this.saveImage(file);
+                this.linkPetAndImage(petDTO.getId(), image.getSeq());
             }
         }
     }
 
 
-
-    @Autowired
-    private PetBoardInsertMapper petBoardInsertMapper;
 
     @Override
     public void registerPet(PetDTO petDTO){
@@ -47,25 +66,21 @@ public class PetBoardRegisterServiceImpl implements PetBoardRegisterService {
 
 
 
-    @Autowired
-    private PetImageMapper petImageMapper;
-    @Autowired
-    private ServletContext servletContext;
+
 
     @Override
     public ImageDTO saveImage(MultipartFile file) throws IOException{
 
+        System.out.println(bucketName);
+
         String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
-        String path = servletContext.getRealPath("/upload");
 
-        System.out.println("저장 경로: " + path);
+        File tempFile = File.createTempFile("upload-", null);
+        file.transferTo(tempFile);
+        amazonS3.putObject(bucketName, filename, tempFile);
+        tempFile.delete();
 
-        File uploadDir = new File(path);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdirs(); // upload 폴더가 없으면 생성
-        }
-
-        file.transferTo(new File(path,filename));
+        String fileUrl = amazonS3.getUrl(bucketName, filename).toString();
 
         //image 테이블에 저장
         ImageDTO imageDTO = new ImageDTO();
@@ -76,8 +91,7 @@ public class PetBoardRegisterServiceImpl implements PetBoardRegisterService {
 
     }
 
-    @Autowired
-    private PetImageRelationMapper petImageRelationMapper;
+
 
     @Override
     public void linkPetAndImage(Long petId, Long imageId) {

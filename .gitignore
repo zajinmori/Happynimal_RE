@@ -26,3 +26,6 @@ Thumbs.db
 .env
 *.properties.local
 /.metadata/
+
+# === AWS키 ===
+src/main/resources/aws.properties
