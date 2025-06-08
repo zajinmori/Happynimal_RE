@@ -18,8 +18,6 @@ public interface VolunteerMapper {
 
 	public int edit(VolunteerBoardDTO dto);
 
-	//public int del(AdoptReviewListDTO dto); 
-
 	public int delete(VolunteerBoardDTO dto);
 
 

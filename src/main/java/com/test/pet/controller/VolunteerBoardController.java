@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.test.pet.model.VolunteerBoardDTO;
 
 
-
-
 /**
  * 자원봉사 게시판을 관리하는 컨트롤러 클래스입니다.
  * 게시글의 목록 조회, 상세보기, 추가, 수정, 삭제와 같은 기능을 제공합니다.
@@ -133,7 +131,3 @@ public class VolunteerBoardController {
         return "redirect:/volunteerboard.do";
     }
 }
-
-
-
-
