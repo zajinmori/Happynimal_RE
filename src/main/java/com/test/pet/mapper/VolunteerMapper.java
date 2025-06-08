@@ -14,13 +14,13 @@ public interface VolunteerMapper {
 
 	public int add(VolunteerBoardDTO dto);
 	
-	VolunteerBoardDTO get(String seq);
+	VolunteerBoardDTO detail(String seq);
 
 	public int edit(VolunteerBoardDTO dto);
 
 	//public int del(AdoptReviewListDTO dto); 
 
-	public int del(VolunteerBoardDTO dto);
+	public int delete(VolunteerBoardDTO dto);
 
 
 	

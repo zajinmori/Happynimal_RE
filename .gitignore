@@ -32,4 +32,6 @@ Thumbs.db
 src/main/resources/aws.properties
 
 # === 기타 ===
+
 .vscode/
+

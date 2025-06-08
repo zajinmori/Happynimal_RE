@@ -40,7 +40,7 @@
 	</insert>
 	
 		<!-- 상세보기 -->
-	<select id="get" resultType="com.test.pet.model.VolunteerBoardDTO">
+	<select id="detail" resultType="com.test.pet.model.VolunteerBoardDTO">
 	     select 
 	        seq, 
 	        title, 
@@ -71,7 +71,7 @@
 	</update>
 	
 	<!-- 삭제하기 -->
-	<delete id="del" parameterType="string">
+	<delete id="delete" parameterType="string">
 		delete from BoardVolunteer
 			where seq = #{seq}
 	</delete>
