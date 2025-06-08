@@ -14,6 +14,6 @@ public class S3DebugCheck {
 
     @PostConstruct
     public void init() {
-        System.out.println("s3 가능? :" + (s3 != null ? "LOADED 👍" : "NULL ❌"));
+        System.out.println("s3 Bean 만들어짐? :" + (s3 != null ? "👍" : "❌"));
     }
 }

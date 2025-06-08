@@ -1,4 +1,4 @@
-package com.test.pet.service.Impl;
+package com.test.pet.service.impl;
 
 import com.test.pet.mapper.ShelterLocationMapper;
 import com.test.pet.model.LocationDTO;

@@ -1,4 +1,4 @@
-package com.test.pet.service.Impl;
+package com.test.pet.service.impl;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.test.pet.mapper.PetBoardInsertMapper;
