@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.pet.mapper.PetImageRelationMapper">
+
+
+    <insert id="insertPetImage" parameterType="com.test.pet.model.PetImageDTO">
+        INSERT INTO pet_image (seq, seqPet, seqImage)
+        VALUES (seqPet_Image.nextval, #{seqPet}, #{seqImage})
+    </insert>
+
+</mapper>
