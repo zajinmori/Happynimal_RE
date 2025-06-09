@@ -11,7 +11,11 @@
     
     <typeAliases>
     	<typeAlias alias="AdoptionApplication" type="com.test.pet.model.AdoptionApplication"/>
-    	<typeAlias alias="PetResult" type="com.test.pet.model.PetResult" />
+<<<<<<< HEAD
+    	<typeAlias alias="PetResult" type="com.test.pet.model.PetResulDTO" />
+=======
+    	<typeAlias alias="PetResult" type="com.test.pet.model.PetResultDTO" />
+>>>>>>> 5a11f3efadd412a59eab27364649709560344f8b
 	</typeAliases>
 
 

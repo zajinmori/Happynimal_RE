@@ -1,5 +1,6 @@
 package com.test.pet.controller;
 
+import com.test.pet.service.PetResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.test.pet.model.PetResult;
+import com.test.pet.model.PetResultDTO;
 import com.test.pet.model.QuizScore;
-import com.test.pet.service.PetResultService;
 
 /**
  * 반려동물 매칭과 관련된 컨트롤러 클래스입니다.
@@ -38,10 +38,10 @@ public class PetMatchController {
      * @param model 결과 데이터를 담는 모델 객체
      * @return 결과 페이지 뷰 이름
      */
-    @PostMapping("/calculateResult")
+    @PostMapping("/calculateResult.do")
     public String calculateResult(@ModelAttribute QuizScore quizScore, Model model) {
         int totalScore = quizScore.getTotalScore();
-        PetResult result = petResultService.getRandomResultByScore(totalScore);
+        PetResultDTO result = petResultService.getRandomResultByScore(totalScore);
         model.addAttribute("result", result);
         return "petquiz/quizresult"; // 결과 페이지
     }

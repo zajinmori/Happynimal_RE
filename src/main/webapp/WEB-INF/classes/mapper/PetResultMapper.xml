@@ -3,7 +3,7 @@
 
 
 <mapper namespace="com.test.pet.mapper.PetResultMapper">
-    <select id="findResultsByScore" parameterType="int" resultType="com.test.pet.model.PetResult">
+    <select id="findResultsByScore" parameterType="int" resultType="com.test.pet.model.PetResultDTO">
     
         SELECT * FROM result
         <![CDATA[
