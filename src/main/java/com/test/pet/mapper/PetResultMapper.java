@@ -4,12 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-
-import com.test.pet.model.PetResult;
+import com.test.pet.model.PetResultDTO;
 
 @Mapper
-@Repository
 public interface PetResultMapper {
-	 List<PetResult> findResultsByScore(@Param("score") int score);
+	 List<PetResultDTO> findResultsByScore(@Param("score") int score);
 }

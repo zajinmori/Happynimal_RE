@@ -32,6 +32,46 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            /* Intro Section: centered clean layout */
+            .needColor{
+                color: #FF9100;
+                font-size: 1.7rem;
+            }
+
+            .intro-section {
+                background: #FFF9E0;
+                padding: 80px 0;
+            }
+            .intro-section .container {
+                max-width: 1400px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            .intro-section h2 {
+                font-size: 2.8rem;
+                font-weight: 700;
+                color: #00712D;
+                margin-bottom: 1.5rem;
+                line-height: 1.3;
+            }
+            .intro-section #aboutsubject {
+                color: #FF9100;
+            }
+            .intro-section p {
+                font-size: 1.4rem;
+                line-height: 1.8;
+                color: #444;
+                margin-bottom: 1.2rem;
+            }
+            .intro-section #aboutend {
+                font-size: 2rem;
+                font-weight: 600;
+                color: #FF9100;
+                margin-top: 2rem;
+            }
+        </style>
     </head>
 
     <body>
@@ -46,49 +86,7 @@
 
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.do" class="navbar-brand p-0">
-                    <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="index.do" class="nav-item nav-link">Home</a>
-                        <a href="about.do" class="nav-item nav-link active">소개</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">입양</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="adoptioninfo.do" class="dropdown-item">입양안내</a>
-                                <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
-                                <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                                <a href="review.do" class="dropdown-item">입양후기</a>
-                            </div>
-                        </div>
-                        
-        
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">활동</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="volunteerinfo.do" class="dropdown-item">봉사활동 안내</a>
-                                <a href="volunteerboard.do" class="dropdown-item">봉사활동 모집</a>
-                                <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
-                            </div>
-                        </div>
-                        <a href="shelter.do" class="nav-item nav-link">보호소 및 병원</a>
-                        <a href="donation.do" class="nav-item nav-link">후원</a>
-                    </div>
-                    <div class="d-none d-xl-flex me-3">
-                        <div class="d-flex flex-column pe-3 border-end border-primary">
-                           
-                        </div>
-                    </div>
-                    
-                    <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
-                </div>
-            </nav>
+            <jsp:include page="/WEB-INF/views/common/nav.jsp" />
 
             <!-- Header Start -->
             <div class="container-fluid bg-breadcrumb">
@@ -125,82 +123,15 @@
         <!-- Modal Search End -->
 
         <!-- About Start -->
-        <div class="container-fluid about py-5">
-            <h2><strong id="aboutsubject">Happynimal</strong>, 따뜻한 마음으로 채워지는 입양 이야기</h2><br>
-            <p>
-            	Happynimal은 유기동물에게 새로운 가족을 찾아주는 입양 플랫폼입니다. 이곳에서는 보호소에서 기다리고 있는 다양한 반려동물의 정보를 쉽고 빠르게 확인할 수 있으며, 직접 인연을 맺을 수 있는 기회를 제공합니다.<br><br>
-            	단순히 동물을 입양하는 것 이상의 경험을 추구하는 Happynimal은, 사랑이 필요한 아이들과 따뜻한 마음을 가진 분들을 연결해드립니다.<br><br>
-				함께 할 반려동물을 찾는 과정에서 맞춤형 추천 서비스를 통해 여러분의 성향에 맞는 동물을 만나보세요. 입양 전, 후로 필요한 정보와 지원도 제공하니, 처음 입양을 고려하시는 분들도 걱정 없이 진행하실 수 있습니다.<br><br><br>
-            </p>
-            <div id="aboutend">저희와 함께 반려동물에게 따뜻한 집을 만들어 주세요.</div>
-        </div>
-        <!-- About End -->
-
-        <!-- Fact Counter -->
-        <div class="container-fluid counter py-5">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="counter-item">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-thumbs-up fa-3x text-white"></i>
-                            </div>
-                            <h4 class="text-white my-4">Happy Clients</h4>
-                            <div class="counter-counting">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">456</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="counter-item">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-truck fa-3x text-white"></i>
-                            </div>
-                            <h4 class="text-white my-4">Transport</h4>
-                            <div class="counter-counting">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">513</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="counter-item">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-users fa-3x text-white"></i>
-                            </div>
-                            <h4 class="text-white my-4">Employees</h4>
-                            <div class="counter-counting">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">53</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="counter-item">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-heart fa-3x text-white"></i>
-                            </div>
-                            <h4 class="text-white my-4">Years Experiance</h4>
-                            <div class="counter-counting">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">17</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="container-fluid intro-section">
+            <div class="container">
+                <h2><strong id="aboutsubject">Happynimal</strong>,<br> 따뜻한 마음으로 채워지는 입양 이야기</h2><br><br>
+                <p><strong class="needColor">Happynimal</strong>은 유기동물에게 새로운 가족을 찾아주는 입양 플랫폼입니다.<br> 이곳에서는 보호소에서 기다리고 있는 다양한 반려동물의 정보를 쉽고 빠르게 확인할 수 있으며, 직접 인연을 맺을 수 있는 기회를 제공합니다.</p>
+                <p>단순히 동물을 입양하는 것 이상의 경험을 추구하는 <strong class="needColor">Happynimal</strong>은, 사랑이 필요한 아이들과 따뜻한 마음을 가진 분들을 연결해드립니다.</p>
+                <p>함께 할 반려동물을 찾는 과정에서 맞춤형 추천 서비스를 통해 여러분의 성향에 맞는 동물을 만나보세요. <br> 입양 전, 후로 필요한 정보와 지원도 제공하니, 처음 입양을 고려하시는 분들도 걱정 없이 진행하실 수 있습니다.</p>
+                <div id="aboutend">저희와 함께 반려동물에게 따뜻한 집을 만들어 주세요.</div>
             </div>
         </div>
-        <!-- Fact Counter -->
-
-        <!-- feature Start -->
-        
-        
-        <!-- feature End -->
-
-        <!-- Footer Start -->
-        
-
         
         <!-- Copyright Start -->
         <div class="container-fluid copyright py-4">
@@ -208,12 +139,6 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>

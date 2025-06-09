@@ -31,6 +31,59 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            .breadcrumb a { color: #fff; }
+            /* Volunteer Info Section */
+            .volunteer-info { background: #FFFBE6; padding: 80px 0; }
+            .volunteer-info .section-title h2 {
+                font-size: 2.75rem;
+                color: #00712D;
+                margin-bottom: 0.5rem;
+            }
+            .volunteer-info .section-title p {
+                font-size: 1.125rem;
+                color: #666;
+                margin-bottom: 2.5rem;
+            }
+            .vol-card {
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                padding: 2rem;
+                text-align: center;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+            }
+            .vol-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            }
+            .vol-card .icon {
+                font-size: 2.5rem;
+                color: #00712D;
+                margin-bottom: 1rem;
+            }
+            .vol-card h4 {
+                font-size: 1.5rem;
+                color: #333;
+                margin-bottom: 1rem;
+            }
+            .vol-card p,
+            .vol-card ul {
+                font-size: 1rem;
+                color: #555;
+                line-height: 1.6;
+                text-align: left;
+                margin: 0 auto;
+                max-width: 400px;
+            }
+            .vol-card ul { padding-left: 1.2rem; }
+            .vol-card ul li { margin-bottom: 0.75rem; }
+        </style>
     </head>
 
     <body>
@@ -81,34 +134,43 @@
         </div>
         <!-- Modal Search End -->
 
-        <!-- feature Start -->
-      <div class="infomation">
-            <h2>유기동물 봉사활동 안내</h2>
-            <br>
-            <div class="about">
-            	<p>
-            		유기동물 보호소에서 보호 중인 동물들에게 따뜻한 손길을 건네주세요. 여러분의 작은 도움이 유기동물들에게 큰 위로가 됩니다.<br><br>
-            		봉사활동은 동물 돌보기, 보호소 청소, 산책 등의 다양한 활동으로 이루어져 있습니다. 함께하는 시간 동안 동물과 유대감을 쌓고<br><br>
-           			 새로운 경험을 할 수 있습니다. 동물을 사랑하고 보호에 관심이 있는 분들의 많은 참여 부탁드립니다.
-            	</p>
-            	<br><br>
+        <!-- Volunteer Info Content -->
+        <section class="volunteer-info">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>유기동물 봉사활동 안내</h2>
+                    <p>보호소 동물들에게 따뜻한 손길을 건네는 다양하고 의미 있는 봉사활동입니다.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <!-- Activity Description Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vol-card">
+                            <div class="icon"><i class="fa fa-paw"></i></div>
+                            <h4 style="color: #FF9100;">활동 내용</h4>
+                            <p>유기동물 보호소에서 보호 중인<br> 동물들에게 따뜻한 손길을 전합니다.</p><br>
+                            <ul>
+                                <li>동물 먹이 주기 및 돌보기</li>
+                                <li>보호소 청소 및 생활환경 정비</li>
+                                <li>반려동물 산책 및 놀이 지원</li>
+                                <li>기타 봉사 지원 활동</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Procedure Card -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="vol-card">
+                            <div class="icon"><i class="fa fa-calendar-check"></i></div>
+                            <h4 style="color: #FF9100;">신청 절차</h4><br>
+                            <ul>
+                                <li>신청서 작성: 온라인 폼에 필수 정보 입력</li>
+                                <li>일정 조율: 가능한 날짜와 시간 안내</li>
+                                <li>활동 참여: 정해진 일정에 맞춰 방문</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            
-            <h2>봉사활동 신청 절차 안내</h2>
-            <br>
-            <div class="about">
-            <ol class="centered-list">
-            	<li>1. 신청서 작성: 홈페이지에서 봉사활동 신청서를 작성해 주세요.</li><br><br>
-            	<li>2. 일정 조율: 보호소에서 봉사활동 가능한 날짜와 시간을 안내해 드립니다.</li><br><br>
-            	<li>3. 봉사활동 참여: 정해진 일정에 맞춰 보호소에 방문하여 봉사활동에 참여합니다.</li>
-            </ol>
-            </div>
-            <br><br>
-            
-            
-        </div>
-        <!-- feature End -->
+        </section>
 
         
 

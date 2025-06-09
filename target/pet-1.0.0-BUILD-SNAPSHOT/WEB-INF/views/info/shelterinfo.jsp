@@ -5,6 +5,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<style>
+
+
+    .content td{
+        border: 1px solid black;
+        padding: 8px 12px;
+        text-align: center;
+    }
+
+    .shelter-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 50px; /* 위와의 간격 */
+        margin-bottom: 50px;
+        padding: 0 20px;
+    }
+
+    .table-body {
+        border: none;
+        border-collapse: collapse;
+        background-color: white;
+    }
+
+    .table-body td,
+    .table-body th {
+        border: none;
+        border-bottom: 1px solid #ccc;
+        padding: 12px 20px;
+        text-align: center;
+    }
+
+
+</style>
+
     <head>
         <meta charset="utf-8">
         <title>Happynimal</title>
@@ -31,6 +66,9 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1f82e3629ef09c1d71731d2b1e7263c8&libraries=clusterer"></script>
     </head>
 
     <body>
@@ -45,49 +83,7 @@
 
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
-        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-            <a href="index.do" class="navbar-brand p-0">
-                <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
-                <!-- <img src="img/logo.png" alt="Logo"> -->
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="fa fa-bars"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto py-0">
-                    <a href="index.do" class="nav-item nav-link">Home</a>
-                        <a href="about.do" class="nav-item nav-link">소개</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">입양</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="adoptioninfo.do" class="dropdown-item">입양안내</a>
-                                <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
-                                <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                                <a href="review.do" class="dropdown-item">입양후기</a>
-                            </div>
-                        </div>
-                        
-        
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">활동</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="volunteerinfo.do" class="dropdown-item">봉사활동 안내</a>
-                                <a href="volunteerboard.do" class="dropdown-item">봉사활동 모집</a>
-                                <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
-                            </div>
-                        </div>
-                        <a href="shelter.do" class="nav-item nav-link active">보호소 및 병원</a>
-                        <a href="donation.do" class="nav-item nav-link">후원</a>
-                </div>
-                <div class="d-none d-xl-flex me-3">
-                    <div class="d-flex flex-column pe-3 border-end border-primary">
-                       
-                    </div>
-                </div>
-                
-                <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
-            </div>
-        </nav>
+        <jsp:include page="/WEB-INF/views/common/nav.jsp" />
 
             <!-- Header Start -->
             <div class="container-fluid bg-breadcrumb">
@@ -104,56 +100,56 @@
         </div>
         <!-- Navbar & Hero End -->
 
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h4 class="modal-title mb-0" id="exampleModalLabel">Search by keyword</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text btn border p-3"><i class="fa fa-search text-white"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Search End -->
 
-        <!-- 404 Start -->
-        <div class="container-fluid bg-light py-5">
-            <div class="container py-5 text-center">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
-                        <h1 class="display-1">404</h1>
-                        <h1 class="mb-4">Page Not Found</h1>
-                        <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to our home page or try to use a search?</p>
-                        <a class="btn btn-primary rounded-pill py-3 px-5" href="index.html">Go Back To Home</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 404 End -->
 
-        
+       <%--Map 들어갑니다--%>
 
-        
-        <!-- Copyright Start -->
+       <!-- 전체 컨테이너 -->
+               <div class="shelter-container">
+                   <div class="shelter-wrapper">
+                       <div id="map" style="width:800px; height:1100px; border-radius: 25px; box-shadow: 2px 5px 15px rgba(0,0,0,0.25); position: relative; z-index: 2; "></div>
+
+                       <div class="tb_wrap" style="max-height: 1100px; overflow-y: auto; padding: 55px 65px; background: #fff; border-raidus: 0 25px 25px 0; ransform: translateX(-50px); padding-left: 100px; box-sizing: border-box; ">
+                           <div class="scr_wrap" style="width: 100%; height: 100%;">
+                               <table class="table-body">
+                                   <tbody>
+                                   <c:if test="${not empty shelterLocations}">
+                                       <c:forEach items="${shelterLocations}" var="loc" varStatus="status">
+                                           <tr class="content">
+                                               <td><a href="#" class="shelter-link" data-index="${status.index}">${loc.name}</a></td>
+                                               <td>${loc.address}</td>
+                                               <td>${loc.telephone}</td>
+                                           </tr>
+                                       </c:forEach>
+                                   </c:if>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
+
+
+
+
+
+
+
+
+
+       <!-- Copyright Start -->
         <div class="container-fluid copyright py-4">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
                     </div>
                     <div class="col-md-6 text-center text-md-end text-body">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+
                     </div>
                 </div>
             </div>
@@ -177,6 +173,92 @@
 
        <!-- Template Javascript -->
        <script src="<c:url value='/resources/js/main.js'/>"></script>
+
+
+
+       <script>
+
+           var container = document.getElementById('map');
+           var options = {
+               center: new kakao.maps.LatLng(37.5665, 126.9780),
+               level: 9
+           };
+           var map = new kakao.maps.Map(container, options);
+
+           // 보호소 정보 배열
+           const locations = [
+               <c:forEach var="loc" items="${shelterLocations}" varStatus="status">
+               {
+                   name: "<c:out value='${loc.name}'/>",
+                   lat: ${loc.latitude},
+                   lng: ${loc.longitude},
+                   address: "<c:out value='${loc.address}'/>",
+                   tel: "<c:out value='${loc.telephone}'/>"
+               }<c:if test="${!status.last}">,</c:if>
+               </c:forEach>
+           ];
+
+           let markers = [];
+           let infowindows = [];
+           let currentInfowindow = null;
+
+           locations.forEach(function(loc, index) {
+               const marker = new kakao.maps.Marker({
+                   map: map,
+                   position: new kakao.maps.LatLng(loc.lat, loc.lng),
+                   title: loc.name
+               });
+
+               const iwContent =
+                   '<div style="padding:10px; width:200px; background:#FFFBE6; ' +
+                   'box-shadow: 0 0 0 2px #00712D; border-radius: 8px;">' +
+                   '<b style="color:#ff9100; font-size:16px;">' + loc.name + '</b><br>' +
+                   '<span style="color:#333; font-size:14px;">' + loc.address + '</span><br>' +
+                   '<span style="color:#555; font-size:13px;">' +
+                   (loc.tel && loc.tel.trim() !== '' ? loc.tel : '전화번호 없음') +
+                   '</span>' +
+                   '</div>';
+
+               const infowindow = new kakao.maps.InfoWindow({
+                   content: iwContent,
+                   removable: true
+               });
+
+               kakao.maps.event.addListener(marker, 'click', function () {
+                   if (currentInfowindow) {
+                       currentInfowindow.close();
+                   }
+
+                   map.setCenter(marker.getPosition());
+                   infowindow.open(map, marker);
+                   currentInfowindow = infowindow;
+               });
+
+               // 배열 저장
+               markers.push(marker);
+               infowindows.push(infowindow);
+           });
+
+           document.querySelectorAll('.shelter-link').forEach((el) => {
+               el.addEventListener('click', function (e) {
+                   e.preventDefault();
+
+                   const index = parseInt(this.dataset.index, 10);
+                   const marker = markers[index];
+                   const infowindow = infowindows[index];
+
+                   if (currentInfowindow) {
+                       currentInfowindow.close();
+                   }
+
+                   map.setCenter(marker.getPosition());
+                   infowindow.open(map, marker);
+                   currentInfowindow = infowindow;
+               });
+           });
+
+       </script>
+
     </body>
 
 </html>

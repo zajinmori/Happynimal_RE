@@ -10,8 +10,6 @@ import java.util.Map;
 @Mapper
 public interface PetBoardListMapper {
 
-   /* List<PetBoardDTO> selectAllPetBoard();*/
-
     int countAllPets();
     List<PetBoardDTO> selectPetBoardList(Map<String, Object> params);
 }

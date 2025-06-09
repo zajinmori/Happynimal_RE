@@ -285,11 +285,11 @@
 
 #aboutsubject{
 	color: #FF9100;
-	font-size: 30px;
+	font-size: 50px;
 }
 
 #aboutend{
-	font-size: 30px;
+	font-size: 60px;
 	
 }
 
@@ -311,7 +311,7 @@
 	width: 70%;
 	margin: 0 auto;
 	padding: 200px;
-	background-color: white;
+	background-color: #FFFBE6;
 	
 }
 

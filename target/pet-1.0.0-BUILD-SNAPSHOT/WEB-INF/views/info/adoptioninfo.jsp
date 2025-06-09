@@ -15,7 +15,7 @@
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 
         <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -31,6 +31,56 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            .breadcrumb a { color: #fff; }
+            /* Adoption Info Section */
+            .adopt-info { padding: 80px 0; }
+            /* Expand container for wider cards */
+            .adopt-info .container { max-width: 1400px; }
+            .adopt-info .section-title h2 {
+                font-size: 2.75rem;
+                color: #00712D;
+                margin-bottom: 1rem;
+            }
+            .adopt-info .section-title p {
+                font-size: 1.125rem;
+                color: #666;
+                margin-bottom: 3rem;
+            }
+            .info-card {
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                /* allow horizontal overflow if needed */
+                overflow-x: auto;
+            }
+            .info-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+            }
+            .info-card .icon {
+                font-size: 2.5rem;
+                color: #00712D;
+                margin-bottom: 1rem;
+            }
+            .info-card h4 {
+                font-size: 1.5rem;
+                color: #333;
+                margin-bottom: 0.75rem;
+            }
+            .info-card p,
+            .info-card ul {
+                font-size: 1rem;
+                color: #555;
+                line-height: 1.6;
+                text-align: left;
+                white-space: nowrap; /* prevent wrapping */
+            }
+            .info-card ul { padding-left: 1.4rem; margin-top: 0; }
+            .info-card ul li { margin-bottom: 0.75rem; }
+        </style>
     </head>
 
     <body>
@@ -45,49 +95,7 @@
 
         <!-- Navbar & Hero Start -->
         <div class="container-fluid position-relative p-0">
-            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-                <a href="index.do" class="navbar-brand p-0">
-                    <h1 class="text-primary"><img src="resources/img/logo2.png"></img>Happynimal</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                    <span class="fa fa-bars"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto py-0">
-                        <a href="index.do" class="nav-item nav-link">Home</a>
-                        <a href="about.do" class="nav-item nav-link">소개</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">입양</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="adoptioninfo.do" class="dropdown-item active">입양안내</a>
-                                <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
-                                <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                                <a href="adoptionreview.do" class="dropdown-item">입양후기</a>
-                            </div>
-                        </div>
-                        
-        
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">활동</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="volunteerinfo.do" class="dropdown-item">봉사활동 안내</a>
-                                <a href="volunteerboard.do" class="dropdown-item">봉사활동 모집</a>
-                                <a href="missingboard.do" class="dropdown-item">실종 게시판</a>
-                            </div>
-                        </div>
-                        <a href="shelterinfo.do" class="nav-item nav-link">보호소 및 병원</a>
-                        <a href="donation.do" class="nav-item nav-link">후원</a>
-                    </div>
-                    <div class="d-none d-xl-flex me-3">
-                        <div class="d-flex flex-column pe-3 border-end border-primary">
-                           
-                        </div>
-                    </div>
-                    
-                    <a href="" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">로그인</a>
-                </div>
-            </nav>
+            <jsp:include page="/WEB-INF/views/common/nav.jsp" />
 
             <!-- Header Start -->
             <div class="container-fluid bg-breadcrumb">
@@ -97,7 +105,7 @@
                         <li class="breadcrumb-item"><a href="index.do">Home</a></li>
                         <li class="breadcrumb-item"><a href="#">Adoption</a></li>
                         <li class="breadcrumb-item active text-primary">Adoption Information</li>
-                    </ol>    
+                    </ol>
                 </div>
             </div>
             <!-- Header End -->
@@ -123,59 +131,68 @@
         </div>
         <!-- Modal Search End -->
 
-        <!-- feature Start -->
-        <div class="infomation">
-            <h2>유기동물 입양 안내</h2>
-            <br>
-            <div class="about">
-            <p>
-            대한민국에는 매년 수많은 유기동물이 보호소에 들어오고 있으며, 이 중 많은 동물들이 가족을 만나지 못한 채 안타깝게 떠나는 현실입니다.<br><br>
-            유기동물들은 각기 다른 이유로 거리로 나앉거나 보호소로 오게 되지만, 모두가 사랑받고 행복할 자격이 있는 소중한 생명들입니다.<br><br>
-			Happynimal의 입양 절차는 유기동물들에게 새 가정을 찾아주는 동시에 입양자분들도 준비된 환경에서 반려동물과의 새로운 시작을 맞이할 수 있도록 설계되어 있습니다.<br><br> 
-			입양은 단순한 결정이 아닌 평생의 책임이 따르는 중요한 약속입니다. 이에 따라 입양 신청 시부터 입양 후에도 지속적으로 지원하며, 필요한 정보를 제공하고 있습니다.<br><br>
-            </p>
+        <!-- Adoption Info Content -->
+        <!-- Adoption Info Content -->
+        <section class="adopt-info">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>유기동물 입양 안내</h2>
+                    <p>사랑받을 자격이 있는 반려동물들을 위한, 쉽고 안전한 입양 안내를 제공합니다.</p>
+                </div>
+                <div class="row g-4">
+                    <!-- Original about text as bullet list -->
+                    <div class="col-md-4">
+                        <div class="info-card p-4 h-100">
+                            <div class="icon text-center"><i class="fa fa-paw"></i></div>
+                            <h4 class="text-center" style="color: #FF9100;">입양 안내</h4><br>
+                            <ul>
+                                <li>보호소로 유입되는 유기동물 수 증가</li>
+                                <li>각기 다른 사연으로 보호소에 머무는 반려동물</li>
+                                <li>사랑받을 자격이 있는 소중한 생명</li>
+                                <li>입양자도 준비된 환경에서 새로운 시작 가능</li>
+                                <li>입양 전·후 지속적인 지원과 정보 제공</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Procedure -->
+                    <div class="col-md-4">
+                        <div class="info-card p-4 h-100">
+                            <div class="icon text-center"><i class="fa fa-list-alt"></i></div>
+                            <h4 class="text-center" style="color: #FF9100;">입양 절차</h4><br>
+                            <ul>
+                                <li>입양신청: 원하는 동물을 선택해 신청서를 작성합니다.</li>
+                                <li>상담 및 평가: 생활환경과 준비 상황을 확인합니다.</li>
+                                <li>사전 방문: 자택 방문 면담을 통해 적합성을 검토합니다.</li>
+                                <li>입양 결정: 최종 승인 후 새로운 시작을 진행합니다.</li>
+                                <li>입양 후 관리: 지속적인 상담과 지원을 제공합니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Meaning -->
+                    <div class="col-md-4">
+                        <div class="info-card p-4 h-100">
+                            <div class="icon text-center"><i class="fa fa-heart"></i></div>
+                            <h4 class="text-center" style="color: #FF9100;">입양의 의미</h4><br>
+                            <ul>
+                                <li>새로운 가족을 만나 새로운 삶을 시작하는 기회</li>
+                                <li>보호소에 공간과 자원 여유 제공</li>
+                                <li>사랑과 행복을 나누는 여정의 시작</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            
-            <h2>입양 절차 안내</h2>
-            <br>
-            <div class="about">
-            <ol class="centered-list">
-            	<li>1. 입양신청: 입양을 원하시는 분들은 원하는 동물을 선택해 신청서를 작성합니다.</li><br><br>
-            	<li>2. 상담 및 평가: 입양자분과의 상담을 통해 생활환경과 입양 준비 상황을 확인합니다.</li><br><br>
-            	<li>3. 사전 방문: 입양자분의 자택에 사전에 고지 후 방문하여, 반려동물이 생활하는데 적합한지 등 방문 면담이 진행됩니다.</li><br><br>
-            	<li>4. 입양 결정: 상담이 완료된 후 입양이 최종 승인됩니다. Happynimal은 입양자분들이 최상의 선택을 할 수 있도록 지원합니다.</li><br><br>
-            	<li>5. 입양 후 관리: 입양 후에도 필요한 경우 상담을 진행하며, 반려동물의 건강과 행복을 위해 지속적인 관심을 기울입니다.</li>
-            </ol>
-            </div>
-            <br><br>
-            
-             <h2>유기동물 입양의 의미</h2>
-             <div class="adoptionabout">
-             <p>
-             	입양은 유기동물들에게는 새로운 가족을 만나 새로운 삶을 시작할 수 있는 소중한 기회입니다. 또한 입양을 통해 보호소의 공간과 자원을 다른 유기동물들에게 나눠줄 수 있어 더 많은 동물들이 도움을 받을 수 있게 됩니다.<br>
-             	 Happynimal과 함께 소중한 생명을 구하고, 사랑과 행복을 나누는 여정을 시작해보세요.
-             </p>
-             </div>
-            <br>
-        </div>
-        <!-- feature End -->
+        </section>
 
-        
 
-        
+
+
         <!-- Copyright Start -->
         <div class="container-fluid copyright py-4">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>

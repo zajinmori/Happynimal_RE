@@ -35,6 +35,36 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            /* feature 섹션 전용 */
+            .feature {
+                background: #FFF9E0;
+            }
+            .feature .cta-btn {
+                background: #00712D;
+                background: linear-gradient(135deg, #00712D 0%, #39B54A 100%);
+                color: #fff;
+                border: none;
+                padding: 1rem 2.5rem;
+                font-size: 1.25rem;
+                font-weight: 600;
+                border-radius: 2rem;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .feature .cta-btn:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            }
+            .feature h3 {
+                margin-bottom: 2.5rem; /* h3 아래 여백 확보 */
+            }
+
+            .feature .cta-btn {
+                margin-top: 1.5rem; /* 버튼 위쪽 여백 확보 */
+            }
+        </style>
     </head>
 
     <body>
@@ -68,10 +98,6 @@
                                     <h1 class="display-2 text-capitalize text-white mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.3s" style="animation-delay: 1.3s;">Happynimal</h1>
                                     <p class="mb-5 fs-5 text-white fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.5s" style="animation-delay: 1.5s;">사지말고 <font size="6" color="#FF9100">입양</font>하세요
                                     </p>
-                                    <div class="carousel-caption-1-content-btn fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.7s" style="animation-delay: 1.7s;">
-                                        <a class="btn btn-primary rounded-pill flex-shrink-0 py-3 px-5 me-2" href="#">입양하기</a>
-                                        <a class="btn btn-secondary rounded-pill flex-shrink-0 py-3 px-5 ms-2" href="#">봉사활동 신청</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -83,10 +109,6 @@
                                     <h1 class="display-2 text-capitalize text-white mb-4 fadeInRight animated" data-animation="fadeInRight" data-delay="1.3s" style="animation-delay: 1.3s;">Happynimal</h1>
                                     <p class="mb-5 fs-5 text-white fadeInRight animated" data-animation="fadeInRight" data-delay="1.5s" style="animation-delay: 1.5s;">사지말고 <font size="6" color="#FF9100">입양</font>하세요
                                     </p>
-                                    <div class="carousel-caption-2-content-btn fadeInRight animated" data-animation="fadeInRight" data-delay="1.7s" style="animation-delay: 1.7s;">
-                                        <a class="btn btn-primary rounded-pill flex-shrink-0 py-3 px-5 me-2" href="#">입양후기</a>
-                                        <a class="btn btn-secondary rounded-pill flex-shrink-0 py-3 px-5 ms-2" href="#">봉사활동</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -126,47 +148,15 @@
 
         <!-- feature Start -->
         <div class="container-fluid feature bg-light py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                    <h4 class="text-uppercase text-primary">우리 아이들은 단지 '동물'이 아닙니다.</h4>
-                    <h3 class="display-3 text-capitalize mb-3">사랑받을 자격이 있는 가족입니다.</h3>
-                </div>
-                <div class="row g-4">
-                    <div class=" col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
-                        <div class="feature-item p-4">
-                            <div class="feature-icon mb-3"><img src="resources/img/chatting.png"></div>
-                            <a href="#" class="h4 mb-3">실시간 채팅</a>
-                            <p class="mb-3">실시간으로 상담이 가능합니다.</p>
-                            <a href="#" class="btn text-secondary">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.4s">
-                        <div class="feature-item p-4">
-                            <div class="feature-icon mb-3"><img src="resources/img/petfoot.png"></div>
-                            <a href="quiz.do" class="h4 mb-3">나랑 맞는 반려동물은 ?</a>
-                            <p class="mb-3">테스트를 통해 내 성격과 맞는 반려동물을 추천해줍니다.</p>
-                            <a href="#" class="btn text-secondary">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.6s">
-                        <div class="feature-item p-4">
-                            <div class="feature-icon mb-3"><img src="resources/img/videocam.png"></img></div>
-                            <a href="#" class="h4 mb-3">화상면담</a>
-                            <p class="mb-3">실시간으로 화상 면담이 가능합니다.</p>
-                            <a href="#" class="btn text-secondary">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.8s">
-                        <div class="feature-item p-4">
-                            <div class="feature-icon mb-3"><img src="resources/img/giveheart.png"></img></div>
-                            <a href="#" class="h4 mb-3">입양후기</a>
-                            <p class="mb-3">새로운 보금자리를 찾아간 유기동물들의 이야기를 볼 수 있습니다.</p>
-                            <a href="#" class="btn text-secondary">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
+            <div class="container py-5 text-center">
+                <h4 class="text-uppercase text-primary mb-3">우리 아이들은 단지 '동물'이 아닙니다.</h4>
+                <h3 class="display-3 text-capitalize mb-5">사랑받을 자격이 있는 가족입니다.</h3>
+                <a href="quiz.do" class="btn btn-success btn-lg cta-btn mt-4">
+                    🐶나랑 맞는 반려동물 테스트😺
+                </a>
             </div>
         </div>
+
         <!-- feature End -->
 
 
@@ -177,12 +167,6 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>

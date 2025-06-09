@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +31,85 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            .content-wrapper {
+                background: transparent;
+                padding: 60px 0;
+                max-width: none;
+            }
+            /* Center card horizontally */
+            #resultbox { display: flex; justify-content: center; }
+            .result-card {
+                background: #FFFBE6;
+                border-radius: 24px;
+                box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+                max-width: 900px;
+                width: 80%;
+                overflow: hidden;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .result-card:hover {
+                transform: translateY(-10px) scale(1.03);
+                box-shadow: 0 24px 60px rgba(0,0,0,0.15);
+            }
+            .result-card-header {
+                background: linear-gradient(135deg, #00712D 0%, #39B54A 100%);
+                padding: 36px;
+                text-align: center;
+            }
+            .result-card-header h3 {
+                margin: 0;
+                color: #fff;
+                font-size: 2.2rem;
+                letter-spacing: 0.5px;
+            }
+            .result-card-body {
+                padding: 36px;
+                text-align: center;
+            }
+            .pet-name {
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: #FF7F50;
+                margin: 24px 0;
+            }
+            .pet-image {
+                width: 100%;
+                border-radius: 16px;
+                margin: 30px 0;
+                object-fit: cover;
+            }
+            .pet-desc {
+                font-size: 1.5rem;
+                line-height: 1.8;
+                color: #444;
+                margin-bottom: 36px;
+            }
+            .retry-btn {
+                display: inline-block;
+                padding: 16px 36px;
+                background: #FFDFBA;
+                color: #333;
+                border-radius: 24px;
+                text-decoration: none;
+                font-weight: 700;
+                box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .retry-btn:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            }
+            @media (max-width: 1200px) { .result-card { width: 90%; } }
+            @media (max-width: 992px) { .result-card { width: 95%; } }
+            @media (max-width: 576px) {
+                .result-card-header h3 { font-size: 1.8rem; }
+                .pet-name { font-size: 1.8rem; }
+                .pet-desc { font-size: 1.1rem; }
+                .retry-btn { padding: 14px 28px; }
+            }
+        </style>
     </head>
 
     <body>
@@ -81,33 +161,36 @@
         <!-- Modal Search End -->
 
         <!-- About Start -->
-        
-    		<div id="resultbox">
-		    <c:choose>
-		        <c:when test="${not empty result}">
-		            <h3 id="yourpet">당신에게 맞는 반려동물</h3>
-		            <br>
-		             <h4 id="resultpetname">${result.recommended}</h4>
-		             <br>
-		            <p id="explainpet">${result.result}</p>
-		        </c:when>
-		        <c:otherwise>
-		            <p>추천 결과를 찾을 수 없습니다. 다시 시도해 주세요.</p>
-		        </c:otherwise>
-		    </c:choose>
-    		</div>
-    
-        <!-- About End -->
 
-        <!-- Fact Counter -->
-        
-        <!-- Fact Counter -->
+        <!-- Full-width Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Result Card Start -->
+            <div id="resultbox">
+                <div class="result-card">
+                    <div class="result-card-header">
+                        <h3>당신에게 딱 맞는 반려동물</h3>
+                    </div>
+                    <div class="result-card-body">
+                        <c:choose>
+                            <c:when test="${not empty result}">
+                                <div class="pet-name">${result.recommended}</div>
+                                <c:if test="${not empty result.url}">
+                                    <img src="${result.url}" alt="결과 이미지" class="pet-image" />
+                                </c:if>
+                                <p class="pet-desc"><c:out value="${fn:replace(result.result, '!', '!<br/>')}" escapeXml="false"/></p>
+                            </c:when>
+                            <c:otherwise>
+                                <p class="pet-desc">추천 결과를 찾을 수 없습니다. 다시 시도해 주세요.</p>
+                            </c:otherwise>
+                        </c:choose>
+                        <a href="quiz.do" class="retry-btn"><i class="fas fa-redo-alt"></i> 다시 하기</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Result Card End -->
+        </div>
+        <!-- Full-width Content Wrapper End -->
 
-        <!-- feature Start -->
-        
-        <!-- feature End -->
-
-        <!-- Footer Start -->
         
         <!-- Copyright Start -->
         <div class="container-fluid copyright py-4">
@@ -115,12 +198,6 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>

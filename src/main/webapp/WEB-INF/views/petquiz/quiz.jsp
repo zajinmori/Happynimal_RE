@@ -31,6 +31,27 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <style>
+            .resultBtn {
+                display: block;
+                margin: 2rem auto 0;
+                background: linear-gradient(135deg, #00712D 0%, #39B54A 100%);
+                color: #fff;
+                border: none;
+                padding: 16px 40px;
+                font-size: 1.1rem;
+                font-weight: 600;
+                border-radius: 24px;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                cursor: pointer;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .resultBtn:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            }
+        </style>
     </head>
 
     <body>
@@ -81,11 +102,11 @@
         </div>
         <!-- Modal Search End -->
 
-        <!-- About Start -->
+        <!-- About Start -->ㅁ
         <div class="container-fluid about py-5">
-            <h1 id="testsubject">나랑 맞는 반려동물은 ?!</h1>
+            <h1 id="testsubject">나랑 맞는 반려동물 테스트</h1>
             <br><br>
-            <form id="quiz" action="calculateResult" method="post">
+            <form id="quiz" action="/calculateResult.do" method="post">
                 <ol style="list-style: none;">
                     <li class="testthing">
                         <p class="question">당신의 생활 스타일은 어떠신가요?</p>
@@ -158,7 +179,7 @@
                     </li>
                     
                 </ol>
-                <button type="submit">결과 보기</button>
+                <button class="resultBtn" type="submit">결과 보기</button>
             </form>
         </div>
         <!-- About End -->
