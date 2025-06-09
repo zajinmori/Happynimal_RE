@@ -93,10 +93,10 @@
                
               <h2 id="volunteeradd">봉사활동 모집 수정</h2>
              <div id="form-container">
-   			 <form method="POST" action="${pageContext.request.contextPath}/volunteereditok.do">
+   			 <form method="POST" action="/volunteereditok.do">
    			 
-   			 <div class="form-group" id="group-idMemberShelter">
-                <label for="idMemberShelter" class="form-label"></label>
+   			 <div class="form-group" id="group-seq">
+                <label for="seq" class="form-label"></label>
                 <input type="hidden" id="seq" name="seq" class="form-input" value="${VolunteerListDTO.seq}">
             </div>
        

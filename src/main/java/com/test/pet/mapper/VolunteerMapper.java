@@ -1,6 +1,7 @@
 package com.test.pet.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.test.pet.model.VolunteerBoardDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,9 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface VolunteerMapper {
 	
-	
-	public List<VolunteerBoardDTO> list();
-	
+	int countAllVolunteer();
+	public List<VolunteerBoardDTO> list(Map<String, Object> params);
 
 	public int add(VolunteerBoardDTO dto);
 	

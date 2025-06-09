@@ -2,6 +2,7 @@ package com.test.pet.controller;
 
 import java.util.List;
 
+import com.test.pet.model.PageDTO;
 import com.test.pet.service.VolunteerBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +31,17 @@ public class VolunteerBoardController {
      * @return 게시판 목록 페이지의 뷰 이름
      */
     @GetMapping("/volunteerboard.do")
-    public String volunteerboard(Model model) {
-        List<VolunteerBoardDTO> volunteerList = volunteerBoardService.getVolunteerBoardList();
+    public String volunteerboard(@RequestParam(defaultValue = "1") int page, Model model) {
+        int pageSize = 10;
+        int totalVolunteerCount  = volunteerBoardService.getTotalVolunteerCount();
+
+        List<VolunteerBoardDTO> volunteerList = volunteerBoardService.getVolunteerBoardList(page, pageSize);
+
+        PageDTO pageInfo = new PageDTO(page, pageSize, totalVolunteerCount);
+
         model.addAttribute("volunteerList", volunteerList);
+        model.addAttribute("pageInfo", pageInfo);
+
         return "board/volunteerboard"; // 목록 페이지
     }
 

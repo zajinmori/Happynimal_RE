@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,8 +105,10 @@
         </table>
         
         <div id="button-container">
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <button type="button" class="action-button" id="edit-button" onclick="location.href='volunteeredit.do?seq=${VolunteerListDTO.seq}';">수정하기</button>
             <button type="button" class="action-button" id="delete-button" onclick="location.href='volunteerdel.do?seq=${VolunteerListDTO.seq}';">삭제하기</button>
+            </sec:authorize>
             <button type="button" class="action-button" id="back-button" onclick="location.href='volunteerboard.do';">목록으로 돌아가기</button>
         </div>
 

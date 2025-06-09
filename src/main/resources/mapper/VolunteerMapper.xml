@@ -5,9 +5,17 @@
 
 	<!-- 글목록 보기 -->
 	<select id="list" resultType="com.test.pet.model.VolunteerBoardDTO">
+		<![CDATA[
+		select * from (
+		select rownum as rnum, inner.*from(
 		select seq, title, idmembershelter, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate 
 			from BoardVolunteer
 				order by seq desc
+				) inner
+				where rownum <= #{endRow}
+				)
+				where rnum >= #{startRow}
+		   ]]>
 	</select>
 
 	<!-- 글쓰기 -->
@@ -75,5 +83,10 @@
 		delete from BoardVolunteer
 			where seq = #{seq}
 	</delete>
+
+	<select id="countAllVolunteer" resultType="int">
+		select count(*) from boardvolunteer
+
+	</select>
 	
 </mapper>

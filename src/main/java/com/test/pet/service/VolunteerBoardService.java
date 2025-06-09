@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface VolunteerBoardService {
 
-    List<VolunteerBoardDTO> getVolunteerBoardList();
+    int getTotalVolunteerCount();
+    List<VolunteerBoardDTO> getVolunteerBoardList(int page, int pageSize);
 
     int addVolunteerBoard(VolunteerBoardDTO dto);
 

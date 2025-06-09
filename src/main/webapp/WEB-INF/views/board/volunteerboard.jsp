@@ -83,12 +83,6 @@
         <!-- About Start -->
         <div class="board-container">
             <h1 class="board-title">봉사활동 모집 게시판</h1>
-            
-            <!-- <div class="search-bar">
-                <input type="text" placeholder="검색어를 입력하세요" />
-                <button>검색</button>
-            </div> -->
-            
             <table class="board-table">
                 <thead>
                     <tr>
@@ -109,37 +103,35 @@
 				        </tr>
 				    </c:forEach>
 				</c:if>
-                
-                
                 </tbody>
             </table>
+
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div class="text-center my-4">
+                <a href="volunteeradd.do" class="btn btn-primary btn-lg">봉사활동 등록</a>
+            </div>
+        </sec:authorize>
+
+            <div class="pagination mt-4 text-center">
+                <c:if test="${pageInfo.startPage > 1}">
+                    <a href="volunteerboard.do?page=${pageInfo.startPage - 1}">이전</a>
+                </c:if>
+
+                <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i">
+                    <a href="volunteerboard.do?page=${i}" class="${i == pageInfo.currentPage ? 'active' : ''}">${i}</a>
+                </c:forEach>
+
+                <c:if test="${pageInfo.endPage < pageInfo.totalPage}">
+                    <a href="volunteerboard.do?page=${pageInfo.endPage + 1}">이전</a>
+                </c:if>
+            </div>
         
 
-  
-        <!-- About End -->
-
-        <!-- Fact Counter -->
-        
-        <!-- Fact Counter -->
-
-        <!-- feature Start -->
-        
-        <!-- feature End -->
-
-        <!-- Footer Start -->
-        
-        <!-- Copyright Start -->
         <div class="container-fluid copyright py-4">
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
                         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-                        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
                     </div>
                 </div>
             </div>
