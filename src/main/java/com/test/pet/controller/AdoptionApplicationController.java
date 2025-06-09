@@ -37,7 +37,7 @@ public class AdoptionApplicationController {
 
 
     //입양신청서 제출한거 받기
-    @PostMapping("/submit")
+    @PostMapping("/adoptionAplicationOk.do")
     public String submitForm(@Valid @ModelAttribute("application") AdoptionApplication application,
                              BindingResult bindingResult,
                              Model model) {

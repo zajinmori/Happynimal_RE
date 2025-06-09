@@ -12,7 +12,7 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
 
-        <link rel="icon" href="resources/img/favicon.png">
+        <link rel="icon" href="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/favicon.png">
 
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,7 +95,7 @@
                         <div class="team-item p-4">
                             <div class="team-inner rounded">
                                 <div class="team-img">
-                                    <img src="img/team-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                                    <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/team-1.jpg" class="img-fluid rounded-top w-100" alt="Image">
                                     <div class="team-share">
                                         <a class="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href=""><i class="fas fa-share-alt"></i></a>
                                     </div>
@@ -117,7 +117,7 @@
                         <div class="team-item p-4">
                             <div class="team-inner rounded">
                                 <div class="team-img">
-                                    <img src="img/team-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                                    <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/team-2.jpg" class="img-fluid rounded-top w-100" alt="Image">
                                     <div class="team-share">
                                         <a class="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href=""><i class="fas fa-share-alt"></i></a>
                                     </div>
@@ -139,7 +139,7 @@
                         <div class="team-item p-4">
                             <div class="team-inner rounded">
                                 <div class="team-img">
-                                    <img src="img/team-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                                    <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/team-3.jpg" class="img-fluid rounded-top w-100" alt="Image">
                                     <div class="team-share">
                                         <a class="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href=""><i class="fas fa-share-alt"></i></a>
                                     </div>
@@ -161,7 +161,7 @@
                         <div class="team-item p-4">
                             <div class="team-inner rounded">
                                 <div class="team-img">
-                                    <img src="img/team-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
+                                    <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/team-4.jpg" class="img-fluid rounded-top w-100" alt="Image">
                                     <div class="team-share">
                                         <a class="btn btn-secondary btn-md-square rounded-pill text-white mx-1" href=""><i class="fas fa-share-alt"></i></a>
                                     </div>

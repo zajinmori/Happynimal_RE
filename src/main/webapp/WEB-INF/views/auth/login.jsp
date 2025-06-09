@@ -27,7 +27,7 @@
 
         .login-image {
             flex: 1;
-            background: url('/resources/img/realLoginImg.png') center center / cover no-repeat;
+            background: url('https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/realLoginImg.png') center center / cover no-repeat;
         }
 
         .login-container {

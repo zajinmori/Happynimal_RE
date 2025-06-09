@@ -74,10 +74,7 @@
     <h2>회원가입</h2>
     <form method="post" action="/registerOk.do">
 
-        <div class="radio-group">
-            <label><input type="radio" name="role" value="USER" checked> 일반 사용자</label>
-            <label><input type="radio" name="role" value="ADMIN"> 관리자</label>
-        </div>
+        <input type="hidden" name="role" value="user" />
 
         <div class="form-group">
             <label>아이디</label>

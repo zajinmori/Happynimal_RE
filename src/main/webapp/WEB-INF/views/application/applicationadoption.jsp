@@ -13,7 +13,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="icon" href="resources/img/favicon.png">
+        <link rel="icon" href="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/favicon.png">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +33,28 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+    <style>
+        .resultBtn {
+        display: block;
+        margin: 2rem auto 0;
+        background: linear-gradient(135deg, #00712D 0%, #39B54A 100%);
+        color: #fff;
+        border: none;
+        padding: 16px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 24px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .resultBtn:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+    </style>
     </head>
 
     <body>
@@ -88,7 +110,7 @@
             <h1 id="applicationadop">유기동물 입양 신청서</h1><br>
 
     <%--@elvariable id="application" type=""--%>
-    <form:form modelAttribute="application" action="${pageContext.request.contextPath}/submit" method="post">
+    <form:form modelAttribute="application" action="/adoptionAplicationOk.do" method="post">
         <div id="good">
         <%--@declare id="q11"--%><%--@declare id="q12"--%><%--@declare id="q7"--%><%--@declare id="q5"--%><%--@declare id="q4"--%><%--@declare id="q2"--%><%--@declare id="q1"--%><%--@declare id="maritalstatus"--%><label class="adoptionquestion" for="name">이름</label>
         <form:input path="name" cssClass="userans"/><br><br>
@@ -261,7 +283,7 @@
             <br><br>
 
 
-        <button id="submission" type="submit">제출</button>
+        <button class="resultBtn" type="submit">제출</button>
     </div>
     </form:form>
 </div>

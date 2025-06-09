@@ -16,7 +16,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-        <link rel="icon" href="resources/img/favicon.png">
+        <link rel="icon" href="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/favicon.png">
         <!-- Google Web Fonts -->
 
         
@@ -91,7 +91,7 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img src="resources/img/dog and volunteer.jpg" class="img-fluid w-100" alt="Image">
+                            <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/dog and volunteer.jpg" class="img-fluid w-100" alt="Image">
                             <div class="carousel-caption-1">
                                 <div class="carousel-caption-1-content" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase fw-bold mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">환영해요 !</h4>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="resources/img/rescue.jpg" class="img-fluid w-100" alt="Image">
+                            <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/rescue.jpg" class="img-fluid w-100" alt="Image">
                             <div class="carousel-caption-2">
                                 <div class="carousel-caption-2-content" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase fw-bold mb-4 fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;" style="letter-spacing: 3px;">환영해요 !</h4>

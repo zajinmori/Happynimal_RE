@@ -17,6 +17,10 @@ public class RegisterMemberController {
         return "auth/register";
     }
 
+    @GetMapping("/thanksregister.do")
+    public String thanksregister() {
+        return "auth/thanksregister";
+    }
 
     @Autowired
     MemberRegisterService memberRegisterService = new MemberRegisterService();
@@ -24,7 +28,9 @@ public class RegisterMemberController {
     @PostMapping("/registerOk.do")
     public String registerOk(@RequestParam String role, UserDTO user, AdminDTO admin){
         memberRegisterService.registerByRole(role, user, admin);
-        return "redirect:/login.do";
+        return "redirect:/thanksregister.do";
     }
+
+
 
 }

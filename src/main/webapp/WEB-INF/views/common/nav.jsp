@@ -7,7 +7,7 @@
 <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
     <a href="index.do" class="navbar-brand p-0">
         <h1 class="text-primary">
-            <img src="resources/img/logo2.png"/>Happynimal</h1>
+            <img src="https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/logo2.png"/>Happynimal</h1>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="fa fa-bars"></span>
@@ -22,7 +22,6 @@
                     <a href="adoptioninfo.do" class="dropdown-item">입양안내</a>
                     <a href="petboard.do" class="dropdown-item">기다리는 친구들</a>
                     <a href="applicationadoption.do" class="dropdown-item">입양신청</a>
-                    <a href="review.do" class="dropdown-item">입양후기</a>
                 </div>
             </div>
 
@@ -59,7 +58,10 @@
 
         <%--비로그인 상태일 때--%>
         <sec:authorize access="isAnonymous()">
-            <a href="login.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">
+            <a href="register.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4" style="padding-right: 100px">
+                회원가입
+            </a>
+            <a href="login.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4" style="padding-left: 50px">
                 로그인
             </a>
         </sec:authorize>

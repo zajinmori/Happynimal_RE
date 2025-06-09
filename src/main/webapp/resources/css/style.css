@@ -1205,7 +1205,7 @@ button[type="submit"]:hover {
 .bg-breadcrumb {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(14, 54, 24, 0.7), rgba(0, 0, 0, 0.7)), url(../img/sasa.jpg);
+    background: linear-gradient(rgba(14, 54, 24, 0.7), rgba(0, 0, 0, 0.7)), url(https://happynimal-bucket.s3.ap-northeast-2.amazonaws.com/img/sasa.jpg);
     background-position: center top;
     background-repeat: no-repeat;
     background-size: cover;

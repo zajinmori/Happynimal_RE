@@ -11,17 +11,8 @@
 
 	<context:component-scan base-package="com.test.pet" />
 
-
-	<!-- 정적 리소스를 default 서블릿에게 위임 -->
-	<mvc:default-servlet-handler/>
-
-	<!--"upload 경로로 들어온 요청은 webapp/upload 아래에서 찾아서 그대로 응답해줘" 라는 뜻-->
-	<mvc:resources mapping="/upload/**" location="/upload/" />
-
 	<!-- 필수: 어노테이션 기반 컨트롤러 등 활성화 -->
 	<mvc:annotation-driven/>
-
-	
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
