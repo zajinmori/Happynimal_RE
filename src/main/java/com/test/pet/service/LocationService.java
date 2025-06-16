@@ -7,4 +7,6 @@ import java.util.List;
 public interface LocationService {
     List<LocationDTO> getAllLocation();
 
+    LocationDTO getShelterById(int id);
+
 }

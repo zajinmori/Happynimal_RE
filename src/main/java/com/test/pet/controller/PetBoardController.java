@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -97,9 +98,12 @@ public class PetBoardController {
 
 
 	@GetMapping("/petdetail.do")
-	public String petDetail(@RequestParam("seq") Long id, Model model) {
+	public String petDetail(@RequestParam("seq") Long id, Model model, HttpSession session) {
 		PetBoardDetailDTO dto = petBoardDetailService.getPetBoardDetail(id);
+		session.setAttribute("id", id);
 		model.addAttribute("pet", dto);
+
+		System.out.println("Session seq: " + session.getAttribute("id"));
 		return "board/petboarddetail";
 	}
 }

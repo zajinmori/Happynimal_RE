@@ -35,6 +35,7 @@
         border-bottom: 1px solid #ccc;
         padding: 12px 20px;
         text-align: center;
+        width: 35%;
     }
 
 

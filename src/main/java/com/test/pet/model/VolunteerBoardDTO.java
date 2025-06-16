@@ -2,19 +2,25 @@ package com.test.pet.model;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 @Data
 public class VolunteerBoardDTO {
 
-	private String seq;
-	private String idMemberShelter;
-	private String idAdmin;
+	private int seq;
+	private int shelterSeq;
+	private String shelterName;
 	private String title;
 	private String content;
-	private String dateVolunteerStart;
-	private String dateVolunteerEnd;
-    private String dateRecruitStart;
-    private String dateRecruitEnd;
-    private String regdate;
-    private String numCount;
+	private Date dateVolunteerStart;
+	private Date dateVolunteerEnd;
+    private Date dateRecruitStart;
+    private Date dateRecruitEnd;
+    private Timestamp regdate;
+	private int personnel;
+	private double latitude;
+	private double longitude;
+
 	
 }

@@ -3,70 +3,92 @@
 
 <mapper namespace="com.test.pet.mapper.VolunteerMapper">
 
+
+	<resultMap id="volunteerBoardMap" type="com.test.pet.model.VolunteerBoardDTO">
+		<id column="seq" property="seq"/>
+		<result column="title" property="title"/>
+		<result column="shelter_name" property="shelterName"/>
+		<result column="regdate" property="regdate"/>
+	</resultMap>
+
 	<!-- 글목록 보기 -->
-	<select id="list" resultType="com.test.pet.model.VolunteerBoardDTO">
+	<select id="list" resultMap="volunteerBoardMap">
 		<![CDATA[
-		select * from (
-		select rownum as rnum, inner.*from(
-		select seq, title, idmembershelter, TO_CHAR(regdate, 'YYYY-MM-DD') as regdate 
-			from BoardVolunteer
-				order by seq desc
-				) inner
-				where rownum <= #{endRow}
-				)
-				where rnum >= #{startRow}
+		SELECT *
+		FROM (
+    		SELECT ROWNUM AS rnum, inner.*
+    		FROM (
+        	SELECT vb.seq, vb.title, s.name AS shelter_name, vb.regdate AS regdate
+        	FROM volunteerboard vb
+        	JOIN shelter s ON vb.shelter_seq = s.seq
+        	ORDER BY vb.seq DESC
+    		) inner
+    		WHERE ROWNUM <= #{endRow}
+		)
+		WHERE rnum >= #{startRow}
 		   ]]>
 	</select>
 
 	<!-- 글쓰기 -->
+	<resultMap id="volunteerBoardAddMap" type="com.test.pet.model.VolunteerBoardDTO">
+		<result column="shelter_seq" property="shelterSeq" />
+	</resultMap>
+
 	<insert id="add" parameterType="com.test.pet.model.VolunteerBoardDTO">
-		insert into BoardVolunteer (
+
+		<!--시퀀스를 명시하는 것~ resultType은 DTO에 선언한 필드와 자료형이 같아야함 !!-->
+		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+			SELECT seqVolunteerBoard.nextVal FROM dual
+		</selectKey>
+
+		insert into volunteerboard (
 					seq, 
-					idMemberShelter, 
-					idAdmin, 
+					shelter_seq,
 					title,
 					content,
 					dateVolunteerStart, 
 					dateVolunteerEnd, 
 					dateRecruitStart, 
 					dateRecruitEnd,
-					numCount,
+					personnel,
 					regdate)
     		values (
-    				seqBoardVolunteer.nextVal,
-    				 #{idMemberShelter},
-    				 #{idAdmin, jdbcType=VARCHAR}, 
+					#{seq},
+    				 #{shelterSeq},
     				 #{title},
     				 #{content},
     				 #{dateVolunteerStart}, 
     				 #{dateVolunteerEnd}, 
     				 #{dateRecruitStart}, 
-    				 #{dateRecruitEnd}, 
-    				 #{numCount}, 
-    				 default
+    				 #{dateRecruitEnd},
+					#{personnel},
+    				 sysdate
     				)
 	</insert>
 	
 		<!-- 상세보기 -->
-	<select id="detail" resultType="com.test.pet.model.VolunteerBoardDTO">
-	     select 
-	        seq, 
-	        title, 
-	        idMemberShelter,
+	<resultMap id="volunteerDetailMap" type="com.test.pet.model.VolunteerBoardDTO">
+		<result column="shelter_name" property="shelterName"/>
+	</resultMap>
+
+	<select id="detail" resultMap="volunteerDetailMap">
+	     select
+			vb.*, s.latitude, s.longitude, s.name AS shelter_name,
 	        TO_CHAR(regdate, 'YYYY-MM-DD') as regdate,
-	        TO_CHAR(dateVolunteerStart, 'YYYY-MM-DD') as dateVolunteerStart,
-	        TO_CHAR(dateVolunteerEnd, 'YYYY-MM-DD') as dateVolunteerEnd,
-	        TO_CHAR(dateRecruitStart, 'YYYY-MM-DD') as dateRecruitStart,
-	        TO_CHAR(dateRecruitEnd, 'YYYY-MM-DD') as dateRecruitEnd,
+	        TO_CHAR(dateVolunteerStart, 'YYYY-MM-DD'),
+	        TO_CHAR(dateVolunteerEnd, 'YYYY-MM-DD'),
+	        TO_CHAR(dateRecruitStart, 'YYYY-MM-DD'),
+	        TO_CHAR(dateRecruitEnd, 'YYYY-MM-DD'),
 	        content,
-	        numCount
-	    from BoardVolunteer 
-	    where seq = #{seq}
+			personnel
+	    from volunteerboard vb
+		join shelter s on vb.shelter_seq = s.seq
+	    where vb.seq = #{value}
 	</select>
 	
 	<!-- 수정하기 -->
 	<update id="edit" parameterType="com.test.pet.model.VolunteerBoardDTO">
-		update BoardVolunteer set
+		update volunteerboard set
 			
 			title = #{title},
 			content = #{content},
@@ -80,12 +102,12 @@
 	
 	<!-- 삭제하기 -->
 	<delete id="delete" parameterType="string">
-		delete from BoardVolunteer
+		delete from volunteerboard
 			where seq = #{seq}
 	</delete>
 
 	<select id="countAllVolunteer" resultType="int">
-		select count(*) from boardvolunteer
+		select count(*) from volunteerboard
 
 	</select>
 	

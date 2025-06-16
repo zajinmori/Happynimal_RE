@@ -5,8 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class AdoptionApplication {
+
+	private String idMember;
+	private long seqPet;
+	private long seq;
+	private Date regdate;
 
 	@NotBlank(message = "이름은 필수 입력입니다.")
 	private String name;

@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<style>
 
-</style>
 
 <head>
   <meta charset="utf-8">
@@ -33,6 +31,105 @@
 
   <!-- Template Stylesheet -->
   <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+
+  <style>
+    /* 전체 섹션 배경 및 정렬 */
+    section.notice {
+      background-color: #f4f6f9;
+      padding: 60px 20px;
+    }
+
+    /* 폼 컨테이너 카드 스타일 */
+    .page-title {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: whitesmoke;
+      border-radius: 18px;
+      padding: 50px 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+      animation: fadeInUp 0.5s ease;
+    }
+
+    /* 헤더 텍스트 스타일 */
+    .page-title h2 {
+      font-size: 32px;
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: #00712D;
+    }
+
+    /* 입력 요소 공통 스타일 */
+    #form-container form label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+      display: block;
+    }
+
+    #form-container form input,
+    #form-container form select,
+    #form-container form textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #dcdcdc;
+      border-radius: 12px;
+      font-size: 15px;
+      margin-bottom: 20px;
+      background-color: #fafafa;
+      transition: all 0.2s ease-in-out;
+    }
+
+    #form-container form input:focus,
+    #form-container form select:focus,
+    #form-container form textarea:focus {
+      border-color: #6c63ff;
+      background-color: #fff;
+      box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15);
+      outline: none;
+    }
+
+    /* 제출 버튼 */
+    #form-container form button[type="submit"] {
+      width: 100%;
+      padding: 14px;
+      background-color: #00712D;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      transition: background 0.3s ease-in-out;
+    }
+
+    #form-container form button[type="submit"]:hover {
+      background-color: #FF9100;
+    }
+
+    /* 이미지 미리보기 스타일 */
+    #previewContainer img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+
+    /* 애니메이션 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -88,7 +185,7 @@
 
   <div class="page-title">
 
-    <h2 id="volunteeradd">봉사활동 모집 등록</h2>
+    <h2 id="volunteeradd">유기동물 등록</h2>
     <div id="form-container">
       <form id="myForm" method="POST" action="/petaddok.do" enctype="multipart/form-data">
 
@@ -124,44 +221,44 @@
         </select><br/>
 
         <!-- LOCATION -->
-        <label>발견 위치 (LOCATION):</label>
+        <label>발견 장소: </label>
         <input type="text" name="location" maxlength="300" required /><br/>
 
         <!-- NAME -->
-        <label>이름 (NAME):</label>
+        <label>이름: </label>
         <input type="text" name="name" maxlength="30" required /><br/>
 
-        <label>품종 :</label>
+        <label>품종: </label>
         <input type="text" name="petInfo" maxlength="30" required /><br/>
 
         <!-- GENDER -->
-        <label>성별 (GENDER):</label>
+        <label>성별: </label>
         <select name="gender" required>
           <option value="M">수컷</option>
           <option value="F">암컷</option>
         </select><br/>
 
         <!-- NEUTERED -->
-        <label>중성화 여부 (NEUTERED):</label>
+        <label>중성화 여부: </label>
         <select name="neutered" required>
           <option value="Y">예</option>
           <option value="N">아니오</option>
         </select><br/>
 
         <!-- AGE -->
-        <label>나이 (AGE):</label>
+        <label>나이(세): </label>
         <input type="number" name="age" min="0" max="99" required /><br/>
 
         <!-- WEIGHT -->
-        <label>몸무게 (WEIGHT, kg):</label>
+        <label>몸무게(kg): </label>
         <input type="number" name="weight" step="0.1" min="0" required /><br/>
 
         <!-- DETAIL -->
-        <label>상세 설명 (DETAIL):</label><br/>
+        <label>상세 설명: </label><br/>
         <textarea name="detail" rows="5" cols="50" required></textarea><br/>
 
         <!-- 이미지 파일 업로드 -->
-        <label>이미지 첨부:</label>
+        <label>이미지 첨부: </label>
         <input type="file" name="images" id="imageInput" multiple /><br/><br/>
         <div id="previewContainer" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
 
@@ -170,8 +267,6 @@
       </form>
     </div>
   </div>
-
-
 </section>
 
 
@@ -183,12 +278,6 @@
     <div class="row g-4 align-items-center">
       <div class="col-md-6 text-center text-md-start mb-md-0">
         <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Happynimal</a>, All right reserved.</span>
-      </div>
-      <div class="col-md-6 text-center text-md-end text-body">
-        <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
-        <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
-        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-        Designed By <a class="border-bottom text-white" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
       </div>
     </div>
   </div>

@@ -9,4 +9,6 @@ import java.util.List;
 public interface ShelterLocationMapper {
 
     List<LocationDTO> getAllLocation();
+
+    LocationDTO getShelterById(int id);
 }

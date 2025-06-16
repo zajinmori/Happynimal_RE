@@ -184,6 +184,13 @@
             </div>
         </section>
 
+        <div class="text-center my-4">
+            <a href="petboard.do" class="btn btn-primary btn-lg">기다리는 친구들</a>
+            <c:if test="${not empty sessionScope.id}">
+            <a href="applicationadoption.do" class="btn btn-primary btn-lg">🐶입양하기😺</a>
+            </c:if>
+        </div>
+
 
 
 

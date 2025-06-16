@@ -7,5 +7,17 @@
     <select id="getAllLocation" resultType="com.test.pet.model.LocationDTO">
         select seq, name, telephone, address, latitude, longitude from shelter
     </select>
-    
+
+    <resultMap id="shelterLocationMap" type="com.test.pet.model.LocationDTO">
+        <id column="id" property="id"/>
+    </resultMap>
+
+    <select id="getShelterById" parameterType="int" resultMap="shelterLocationMap">
+        select seq as id,
+        name,
+        latitude,
+        longitude
+        from shelter
+        where seq = #{shelter_seq}
+    </select>
 </mapper>

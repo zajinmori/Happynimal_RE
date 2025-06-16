@@ -2,7 +2,9 @@ package com.test.pet.controller;
 
 import java.util.List;
 
+import com.test.pet.model.LocationDTO;
 import com.test.pet.model.PageDTO;
+import com.test.pet.service.LocationService;
 import com.test.pet.service.VolunteerBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class VolunteerBoardController {
 
     @Autowired
     private VolunteerBoardService volunteerBoardService;
+
+    @Autowired
+    private LocationService locationService;
 
     /**
      * 자원봉사 게시판 목록을 표시합니다.
@@ -55,6 +60,8 @@ public class VolunteerBoardController {
     @GetMapping("/volunteerdetail.do")
     public String volunteerdetail(Model model, String seq) {
         VolunteerBoardDTO dto = volunteerBoardService.getVolunteerBoardDetail(seq);
+        int shelterId = dto.getShelterSeq();
+        LocationDTO locationDTO = locationService.getShelterById(shelterId);
         model.addAttribute("VolunteerListDTO", dto);
         return "board/volunteerdetail";
     }
@@ -79,6 +86,7 @@ public class VolunteerBoardController {
      */
     @PostMapping("/volunteeraddok")
     public String volunteeraddok(Model model, VolunteerBoardDTO dto) {
+        System.out.println(dto);
         int result = volunteerBoardService.addVolunteerBoard(dto);
         return "redirect:/volunteerboard.do";
     }

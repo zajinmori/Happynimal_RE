@@ -14,7 +14,7 @@
     seq, idmember, seqpet, regdate, name, gender, age, telephone, email, calltime, region, maritalStatus, job, q1, q1Memo, q2,q3Adult, q3Minor, q4, q5, q6Memo, q7, q8, q9, q10, q11, q12, q13
 	) 
 	VALUES (
-    seqAdoptionApplication.nextVal, 'softrain', 77, sysdate, #{name}, #{gender}, #{age}, #{telephone}, #{email}, #{calltime}, #{region}, #{maritalStatus},
+    seqAdoptionApplication.nextVal, #{idMember}, #{seqPet}, sysdate, #{name}, #{gender}, #{age}, #{telephone}, #{email}, #{calltime}, #{region}, #{maritalStatus},
     #{job}, #{q1}, #{q1Memo}, #{q2},#{q3Adult}, #{q3Minor}, #{q4}, #{q5}, #{q6Memo}, #{q7}, #{q8}, #{q9}, #{q10}, #{q11}, #{q12}, #{q13}
 	)
 	
@@ -22,8 +22,52 @@
 	
 	
 	
-	<select id="getAllAdoptionApplications" parameterType="com.test.pet.model.AdoptionApplication">
+	<select id="getAllAdoptionApplications" resultType="com.test.pet.model.AdoptionApplication">
 		SELECT * FROM AdoptionApplication
+	</select>
+	
+	<select id="countAllAdoption" resultType="int">
+		select count(*) from adoptionapplication
+	</select>
+
+	<resultMap id="adoptionDetailMap" type="com.test.pet.model.AdoptionDetail">
+		<result column="petname" property="petname"/>
+		<result column="petseq" property="petId"/>
+	</resultMap>
+
+	<select id="detail" resultMap="adoptionDetailMap">
+	select
+		al.seq,
+		al.regdate,
+		al.name,
+		al.gender,
+		al.age,
+		al.telephone,
+		al.email,
+		al.calltime,
+		al.region,
+		al.maritalStatus,
+		al.job,
+		al.q1,
+		al.q1Memo,
+		al.q2,
+		al.q3Adult,
+		al.q3Minor,
+		al.q4,
+		al.q5,
+		al.q6Memo,
+		al.q7,
+		al.q8,
+		al.q9,
+		al.q10,
+		al.q11,
+		al.q12,
+		al.q13,
+		p.name as petname,
+		p.id as petseq
+	from adoptionapplication al
+		join pet2 p on al.seqpet = p.id
+		where al.seq = #{seq}
 	</select>
 	
 </mapper>

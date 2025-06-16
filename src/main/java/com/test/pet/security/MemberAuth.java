@@ -59,6 +59,7 @@ public class MemberAuth implements UserDetailsService {
                     user.getId(),
                     user.getPassword(),
                     user.getNickname(),
+
                     authorities
             );
         }

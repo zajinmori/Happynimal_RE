@@ -36,6 +36,8 @@ public class VolunteerBoardServiceImpl implements VolunteerBoardService {
             params.put("startRow", startRow);
             params.put("endRow", endRow);
 
+        System.out.println(volunteerMapper.list(params));
+
         return volunteerMapper.list(params);
     }
 

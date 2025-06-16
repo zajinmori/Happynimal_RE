@@ -1,17 +1,20 @@
 package com.test.pet.controller;
 
+import com.test.pet.model.PetBoardDetailDTO;
+import com.test.pet.security.CustomUserDetails;
+import com.test.pet.service.AdoptionService;
+import com.test.pet.service.PetBoardDetailService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.test.pet.model.AdoptionApplication;
-import com.test.pet.service.AdoptionApplicationService;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 입양 신청 처리를 담당하는 컨트롤러 클래스입니다.
@@ -20,8 +23,16 @@ import com.test.pet.service.AdoptionApplicationService;
 @Controller
 public class AdoptionApplicationController {
 
-    @Autowired
-    private AdoptionApplicationService adoptionApplicationService;
+
+    private final PetBoardDetailService petBoardDetailService;
+    private final AdoptionService adoptionService;
+
+    public AdoptionApplicationController(PetBoardDetailService petBoardDetailService,
+                                         AdoptionService adoptionService) {
+        this.petBoardDetailService = petBoardDetailService;
+        this.adoptionService = adoptionService;
+    }
+
 
     /**
      * 입양 신청서를 작성하는 페이지를 표시합니다.
@@ -30,8 +41,19 @@ public class AdoptionApplicationController {
      * @return 입양 신청서 작성 화면의 뷰 이름
      */
     @GetMapping("/applicationadoption.do")
-    public String showForm(Model model) {
+    public String showForm(Model model, HttpSession session) {
+
+        Long id = (Long) session.getAttribute("id");
+        if(id == null) {
+            return "redirect:/petboard.do";
+        }
+
+        PetBoardDetailDTO dto = petBoardDetailService.getPetBoardDetail(id);
+
+
         model.addAttribute("application", new AdoptionApplication());
+        model.addAttribute("petInfo", dto);
+
         return "application/applicationadoption";
     }
 
@@ -40,14 +62,26 @@ public class AdoptionApplicationController {
     @PostMapping("/adoptionAplicationOk.do")
     public String submitForm(@Valid @ModelAttribute("application") AdoptionApplication application,
                              BindingResult bindingResult,
-                             Model model) {
+                             Model model, HttpSession session) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) auth.getPrincipal();
+
+        application.setIdMember(userDetails.getUsername());
+
+        Long id = (Long) session.getAttribute("id");
+        if(id == null) {
+            throw new IllegalStateException("선택된 유기동물이 없습니다.");
+        }
+        application.setSeqPet(id);
+
 
         if (bindingResult.hasErrors()){
-            return "application/applicationadoption";
+            return "application/applicationadoption.do";
         }
 
-        adoptionApplicationService.saveAdoptionApplication(application);
-        return "redirect:/successapplicationadoption";
+        adoptionService.saveAdoptionApplication(application);
+        return "redirect:/successapplicationadoption.do";
     }
 
 

@@ -20,6 +20,12 @@
         <security:intercept-url pattern="/resources/**" access="permitAll" />
         <security:intercept-url pattern="/index.do" access="permitAll"/>
         <security:intercept-url pattern="/applicationadoption.do" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/adoptioncheck.do" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/adoptiondetail.do" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/petadd.do" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/volunteeradd.do" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/volunteeredit.do" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/volunteerdel.do" access="hasRole('ROLE_ADMIN')"/>
         <security:form-login
                 login-page="/login.do"
                 login-processing-url="/login.do"

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +32,128 @@
 
         <!-- Template Stylesheet -->
         <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
+
+        <!-- <head> 안에 추가 -->
+        <style>
+            .board-container {
+                max-width: 900px;
+                margin: 3rem auto;
+                padding: 2.5rem;
+                background-color: #FFF9E6;
+                border-radius: 1rem;
+                box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+            }
+
+            .board-title {
+                font-size: 2.2rem;
+                color: #FF9100;
+                text-align: center;
+                margin-bottom: 2rem;
+                position: relative;
+            }
+            .board-title::after {
+                content: '';
+                display: block;
+                width: 6rem;
+                height: 4px;
+                background: #FF9100;
+                margin: 0.5rem auto 0;
+                border-radius: 2px;
+            }
+
+            .board-table {
+                width: 100%;
+                border-collapse: collapse;
+                overflow: hidden;
+                border-radius: 0.5rem;
+                box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.08);
+            }
+
+            .board-table thead th {
+                background: #00712D;
+                color: #fff;
+                padding: 1rem 1.2rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-size: 1rem;
+            }
+
+            .board-table tbody tr {
+                background: #fff;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .board-table tbody tr:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+            }
+
+            .board-table tbody td {
+                padding: 0.9rem 1rem;
+                border-bottom: 1px solid #eee;
+                color: #444;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+            /* 제목만 왼쪽 정렬 */
+            .board-table tbody td:nth-child(2) {
+                text-align: left;
+            }
+
+            /* 링크 스타일 */
+            .board-table tbody a {
+                color: #00712D;
+                text-decoration: none;
+                font-weight: 500;
+            }
+            .board-table tbody a:hover {
+                text-decoration: underline;
+            }
+
+            /* 등록 버튼 */
+            .btn-add {
+                display: inline-block;
+                background: #00712D;
+                color: #fff;
+                padding: 0.7rem 1.4rem;
+                border-radius: 50px;
+                font-weight: 500;
+                transition: background 0.3s ease, transform 0.2s ease;
+            }
+            .btn-add:hover {
+                background: #00712D;
+                transform: translateY(-2px);
+            }
+
+            /* 페이지네이션 */
+            .pagination {
+                display: flex;
+                justify-content: center;
+                gap: 0.4rem;
+                margin-top: 1.5rem;
+            }
+            .pagination a {
+                display: block;
+                padding: 0.5rem 0.9rem;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 0.4rem;
+                color: #555;
+                text-decoration: none;
+                font-size: 0.9rem;
+                transition: background 0.3s, color 0.3s;
+            }
+            .pagination a:hover {
+                background: #FF9100;
+                color: #fff;
+                border-color: #FF9100;
+            }
+            .pagination a.active {
+                background: #FF9100;
+                color: #fff;
+                border: 1px solid #FF9100;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -83,48 +207,60 @@
         <!-- About Start -->
         <div class="board-container">
             <h1 class="board-title">봉사활동 모집 게시판</h1>
+
             <table class="board-table">
+                <colgroup>
+                    <col style="width: 50%;">
+                    <col style="width: 30%;">
+                    <col style="width: 20%;">
+                </colgroup>
                 <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>                 
-                    </tr>
+                <tr>
+                    <th>제목</th>
+                    <th>모집기관</th>
+                    <th>작성일</th>
+                </tr>
                 </thead>
                 <tbody>
-            <c:if test="${not empty volunteerList}">
-				    <c:forEach items="${volunteerList}" var="VolunteerBoardDTO">
-				        <tr>
-		           			<td>${VolunteerBoardDTO.seq}</td>
-		           			<td><a href="volunteerdetail.do?seq=${VolunteerBoardDTO.seq}">${VolunteerBoardDTO.title}</a></td>
-		           			<td>${VolunteerBoardDTO.idMemberShelter}</td>
-		           			<td>${VolunteerBoardDTO.regdate}</td>
-				        </tr>
-				    </c:forEach>
-				</c:if>
+                <c:if test="${not empty volunteerList}">
+                    <c:forEach items="${volunteerList}" var="vo">
+                        <tr>
+                            <td>
+                                <a href="volunteerdetail.do?seq=${vo.seq}">
+                                        ${vo.title}
+                                </a>
+                            </td>
+                            <td>${vo.shelterName}</td>
+                            <td>
+                                <fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
                 </tbody>
             </table>
 
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <div class="text-center my-4">
-                <a href="volunteeradd.do" class="btn btn-primary btn-lg">봉사활동 등록</a>
-            </div>
-        </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <div class="text-center mb-4">
+                    <a href="volunteeradd.do" class="btn-add">봉사활동 등록</a>
+                </div>
+            </sec:authorize>
 
-            <div class="pagination mt-4 text-center">
+            <div class="pagination">
                 <c:if test="${pageInfo.startPage > 1}">
-                    <a href="volunteerboard.do?page=${pageInfo.startPage - 1}">이전</a>
+                    <a href="volunteerboard.do?page=${pageInfo.startPage-1}">&laquo;</a>
                 </c:if>
-
                 <c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage}" var="i">
-                    <a href="volunteerboard.do?page=${i}" class="${i == pageInfo.currentPage ? 'active' : ''}">${i}</a>
+                    <a href="volunteerboard.do?page=${i}"
+                       class="${i == pageInfo.currentPage ? 'active' : ''}">
+                            ${i}
+                    </a>
                 </c:forEach>
-
                 <c:if test="${pageInfo.endPage < pageInfo.totalPage}">
-                    <a href="volunteerboard.do?page=${pageInfo.endPage + 1}">이전</a>
+                    <a href="volunteerboard.do?page=${pageInfo.endPage+1}">&raquo;</a>
                 </c:if>
             </div>
+        </div>
         
 
         <div class="container-fluid copyright py-4">

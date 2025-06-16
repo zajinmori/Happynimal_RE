@@ -19,4 +19,9 @@ public class LocationServiceImpl implements LocationService {
     public List<LocationDTO> getAllLocation() {
         return shelterLocationMapper.getAllLocation();
     }
+
+    @Override
+    public LocationDTO getShelterById(int id) {
+        return shelterLocationMapper.getShelterById(id);
+    }
 }

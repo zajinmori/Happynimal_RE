@@ -54,6 +54,11 @@
                     로그아웃
                 </button>
             </form>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                <div>
+                    <a href="adoptioncheck.do" class="btn btn-primary rounded-pill d-inline-flex flex-shrink-0 py-2 px-4">입양 신청서 확인</a>
+                </div>
+            </sec:authorize>
         </sec:authorize>
 
         <%--비로그인 상태일 때--%>
