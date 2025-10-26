@@ -5,4 +5,5 @@ import com.test.pet.model.PetResultDTO;
 public interface PetResultService {
 
     PetResultDTO getRandomResultByScore(int totalScore);
+
 }

@@ -29,7 +29,7 @@ Thumbs.db
 .env.*
 *.env
 *.properties.local
-src/main/resources/aws.properties
+src/main/resources/config/aws.properties
 
 # === 기타 ===
 .vscode/
